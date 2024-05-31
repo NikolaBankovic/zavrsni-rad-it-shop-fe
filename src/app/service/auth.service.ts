@@ -4,6 +4,8 @@ import {AppNavigation} from "../app.navigation";
 import {User} from "../dto/user.dto";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {environment} from "../../environments/environment.dev";
+import {map} from "rxjs";
+import {Role} from "../enum/role";
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +40,27 @@ export class AuthService {
     this.navigation.navigateToLogin();
   }
 
+  getUserByToken() {
+    return this.http.get<User>(this.url + '/current').pipe(map((user: User) => {
+      this.user = user;
+      return user;
+    }));
+  }
+
   isLoggedIn() {
     return this.user !== undefined;
+  }
+
+  isAdmin() {
+    if (this.user !== undefined) {
+      return this.user.role === Role.ROLE_ADMIN;
+    }
+    return false;
+  }
+
+  tokenExists() {
+    const token = localStorage.getItem('access_token');
+    return !!token;
   }
 
   getCurrentUser() {
