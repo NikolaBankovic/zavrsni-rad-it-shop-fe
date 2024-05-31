@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {AppNavigation} from "../app.navigation";
 import {User} from "../dto/user.dto";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {environment} from "../../environments/environment.dev";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   private readonly navigation = inject(AppNavigation);
   private readonly snackBar = inject(MatSnackBar);
 
-  protected url = 'http://localhost:8080/api/auth';
+  protected url = environment.apiUrl + '/auth';
   protected user: User | undefined = undefined;
 
   register(data: any) {
