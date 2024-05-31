@@ -8,32 +8,25 @@
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <strong>{{ item.product.name }}</strong>
-            <p class="mb-0">Quantity: {{ item.quantity }}</p>
+            <p class="mb-0">Quantity:
+              <button (click)="decrementQuantity(item)" class="btn btn-secondary btn-sm">-</button>
+              {{ item.quantity }}
+              <button (click)="incrementQuantity(item)" class="btn btn-secondary btn-sm">+</button>
+            </p>
             <p class="mb-0">Price: ${{ item.product.price }}</p>
           </div>
           <button (click)="removeItem(item.product.id)" class="btn btn-danger btn-sm">Remove</button>
         </div>
       </li>
     </ul>
-    <button (click)="clearCart()" class="btn btn-warning">Clear Cart</button>
+    <div class="d-flex justify-content-between align-items-center">
+      <strong>Total Cost: ${{ totalCost }}</strong>
+      <button (click)="clearCart()" class="btn btn-warning">Clear Cart</button>
+    </div>
   </div>
 
   <!-- Message when cart is empty -->
   <div *ngIf="!cart || cart.cartItemList.length === 0">
     <p>Your cart is empty.</p>
-  </div>
-
-  <!-- Add new item to cart -->
-  <div class="mt-3">
-    <h3>Add Item</h3>
-    <div class="form-group">
-      <label for="productId">Product ID:</label>
-      <input id="productId" [(ngModel)]="newProductId" placeholder="Product ID" type="number" class="form-control" />
-
-      <label for="quantity" class="mt-2">Quantity:</label>
-      <input id="quantity" [(ngModel)]="newQuantity" placeholder="Quantity" type="number" class="form-control" />
-
-      <button (click)="addItem()" class="btn btn-primary mt-2">Add Item</button>
-    </div>
   </div>
 </div>
