@@ -1,0 +1,14 @@
+.cart-summary {
+  width: 25%;
+
+  mat-card {
+    padding: 20px;
+  }
+
+  .summary-details {
+    margin-top: 20px;
+    div {
+      margin-bottom: 10px;
+    }
+  }
+}
