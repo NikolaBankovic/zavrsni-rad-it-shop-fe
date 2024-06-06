@@ -1,12 +1,19 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <h1 id="title" [routerLink]="'/home'">{{ title }}</h1>
-    <div id="toolbarItems">
+    <div class="left-buttons">
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
+    </div>
+    <div class="spacer"></div>
+    <div class="right-buttons">
+      <a mat-button routerLinkActive="mat-btn-active" [routerLink]="'/cart'">
+        <mat-icon>shopping_cart</mat-icon>
+        <span *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      </a>
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" (click)="logout()"> Logout </a>
       <a *ngIf="!authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/login'"> Login </a>
       <a *ngIf="!authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/register'"> Register </a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<router-outlet />
+<router-outlet></router-outlet>

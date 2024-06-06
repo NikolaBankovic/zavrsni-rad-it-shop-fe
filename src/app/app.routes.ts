@@ -5,6 +5,8 @@ import {HomeComponent} from "./component/home/home.component";
 import {ProductFormComponent} from "./component/product-form/product-form.component";
 import {adminGuard} from "./guard/admin.guard";
 import {notLoggedInGuard} from "./guard/not-logged-in.guard";
+import {CartComponent} from "./component/cart/cart.component";
+import {ProductComponent} from "./component/product/product.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,5 +14,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [notLoggedInGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [notLoggedInGuard] },
   { path: 'create-product', component: ProductFormComponent, canActivate: [adminGuard] },
-  { path: 'edit-product/:id', component: ProductFormComponent, canActivate: [adminGuard]  }
+  { path: 'edit-product/:id', component: ProductFormComponent, canActivate: [adminGuard]  },
+  { path: 'product/:id', component: ProductComponent },
+  { path: 'cart', component: CartComponent }
 ];

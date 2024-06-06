@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Cart, CartItem, CartService} from '../../service/cart.service';
 import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-cart',
@@ -9,12 +11,15 @@ import {NgForOf, NgIf} from "@angular/common";
   imports: [
     FormsModule,
     NgIf,
-    NgForOf
+    NgForOf,
+    MatButton,
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
   cart: Cart | undefined;
   totalCost: number = 0;
 
@@ -76,5 +81,9 @@ export class CartComponent implements OnInit {
     if (this.cart) {
       this.totalCost = this.cart.cartItemList.reduce((total, item) => total + (item.product.price * item.quantity), 0);
     }
+  }
+
+  getImageSrc(base64String: string): string {
+    return `data:image/png;base64,${base64String}`;
   }
 }
