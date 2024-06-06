@@ -2,23 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment.dev';
 import { Observable } from 'rxjs';
-
-export interface User {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  role: string;
-}
-
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-}
+import {Product} from "../dto/product.dto";
+import {User} from "../dto/user.dto";
 
 export interface CartItem {
   id: number;

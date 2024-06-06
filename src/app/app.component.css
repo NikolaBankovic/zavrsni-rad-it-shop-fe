@@ -1,0 +1,21 @@
+mat-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-buttons {
+  display: flex;
+}
+
+.right-buttons {
+  display: flex;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+#title {
+  cursor: pointer;
+}
