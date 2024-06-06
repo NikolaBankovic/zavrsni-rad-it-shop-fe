@@ -16,6 +16,10 @@ export class ProductService {
   }
 
   getProductById(id: number) {
-    return this.http.get(this.url + '/product/' + id);
+    return this.http.get(this.url + `/${id}`);
+  }
+
+  getProductsByCategory(category: string) {
+    return this.http.get(this.url + '/category/' + category);
   }
 }

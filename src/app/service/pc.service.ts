@@ -11,6 +11,10 @@ export class PCService {
 
   protected url = environment.apiUrl + '/pc';
 
+  getPCs() {
+    return this.http.get(this.url + '/all');
+  }
+
   createPC(data: any) {
     return this.http.post(this.url, data);
   }

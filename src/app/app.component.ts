@@ -6,11 +6,12 @@ import {MatAnchor} from "@angular/material/button";
 import {AuthService} from "./service/auth.service";
 import {NgIf} from "@angular/common";
 import {CartService} from "./service/cart.service";
+import {CategoryNavComponent} from "./component/category-nav/category-nav.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatIcon, MatToolbarRow, MatToolbar, RouterLinkActive, RouterLink, MatAnchor, NgIf],
+  imports: [RouterOutlet, MatIcon, MatToolbarRow, MatToolbar, RouterLinkActive, RouterLink, MatAnchor, NgIf, CategoryNavComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

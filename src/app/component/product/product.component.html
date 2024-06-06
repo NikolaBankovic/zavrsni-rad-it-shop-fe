@@ -1,1 +1,29 @@
-<p>product works</p>
+<div class="product-container">
+  <mat-card *ngIf="product">
+    <mat-card-header>
+      <div mat-card-avatar class="product-image"></div>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.manufacturerName }}</mat-card-subtitle>
+    </mat-card-header>
+    <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}"/>
+    <mat-card-content>
+      <p>{{ product.description }}</p>
+      <p><strong>Price:</strong> ${{ product.price }}</p>
+      <p *ngIf="product.pcType"><strong>PC Type:</strong> {{ product.pcType }}</p>
+      <p *ngIf="product.pcPartType"><strong>PC Part Type:</strong> {{ product.pcPartType }}</p>
+      <p *ngIf="product.peripheralType"><strong>Peripheral Type:</strong> {{ product.peripheralType }}</p>
+      <p *ngIf="product.softwareType"><strong>Software Type:</strong> {{ product.softwareType }}</p>
+      <p *ngIf="product.usedState"><strong>Used State:</strong> {{ product.usedState }}</p>
+      <p *ngIf="product.warrantyLength"><strong>Warranty Length:</strong> {{ product.warrantyLength }} months</p>
+      <p *ngIf="product.manufacturerCatalogueNumber"><strong>Catalogue Number:</strong> {{ product.manufacturerCatalogueNumber }}</p>
+      <p *ngIf="product.linkToPartOnManufacturerWebsite">
+        <a [href]="product.linkToPartOnManufacturerWebsite" target="_blank">More details</a>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>BUY NOW</button>
+      <button mat-button>ADD TO CART</button>
+      <button *ngIf="authService.isAdmin()" [routerLink]="['/edit-product', product.id]" mat-button>EDIT</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

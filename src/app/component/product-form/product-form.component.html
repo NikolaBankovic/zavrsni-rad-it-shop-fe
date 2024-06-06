@@ -2,7 +2,8 @@
   <div>
     <div>
       <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
-        <h1>Create product</h1>
+        <h1 *ngIf="isNewProduct">Create product</h1>
+        <h1 *ngIf="!isNewProduct">Edit product</h1>
         <mat-form-field appearance="outline">
           <mat-label>Product type</mat-label>
           <mat-select formControlName="productType" [compareWith]="compare">
@@ -101,7 +102,7 @@
         <br>
         <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
           <mat-label>partLink</mat-label>
-          <input matInput formControlName="partLink">
+          <input matInput formControlName="linkToPartOnManufacturerWebsite">
           <mat-hint>Enter part link:</mat-hint>
           <mat-error>Part link is required!</mat-error>
         </mat-form-field>

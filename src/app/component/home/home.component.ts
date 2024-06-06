@@ -4,6 +4,7 @@ import {Product} from "../../dto/product.dto";
 import {NgForOf, NgIf} from "@angular/common";
 import {CartService} from "../../service/cart.service";
 import {MatButton} from "@angular/material/button";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import {MatButton} from "@angular/material/button";
   imports: [
     NgIf,
     NgForOf,
-    MatButton
+    MatButton,
+    RouterLink
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

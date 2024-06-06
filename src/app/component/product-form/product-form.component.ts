@@ -11,6 +11,8 @@ import {PCService} from "../../service/pc.service";
 import {PcPartService} from "../../service/pc-part.service";
 import {PeripheralService} from "../../service/peripheral.service";
 import {SoftwareService} from "../../service/software.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ProductService} from "../../service/product.service";
 
 @Component({
   selector: 'app-product-form',
@@ -35,12 +37,16 @@ import {SoftwareService} from "../../service/software.service";
 })
 export class ProductFormComponent {
 
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly productService = inject(ProductService);
   private readonly codebookService = inject(CodebookService);
   private readonly pcService = inject(PCService);
   private readonly pcPartService = inject(PcPartService);
   private readonly peripheralService = inject(PeripheralService);
   private readonly softwareService = inject(SoftwareService);
 
+  protected isNewProduct: boolean = true;
   protected productTypes: string[] = [];
   protected pcTypes: string[] = [];
   protected pcPartTypes: string[] = [];
@@ -61,7 +67,7 @@ export class ProductFormComponent {
     'warrantyLength': new FormControl(null, Validators.required),
     'manufacturerName': new FormControl(null, Validators.required),
     'manufacturerCatalogueNumber': new FormControl(null, Validators.required),
-    'partLink': new FormControl(null, Validators.required)
+    'linkToPartOnManufacturerWebsite': new FormControl(null, Validators.required)
   });
 
   constructor() {
@@ -71,6 +77,16 @@ export class ProductFormComponent {
     this.codebookService.getPeripheralTypes().subscribe(data => this.peripheralTypes = data);
     this.codebookService.getSoftwareTypes().subscribe(data => this.softwareTypes = data);
     this.codebookService.getUsedStates().subscribe(data => this.usedStates = data);
+  }
+
+  ngOnInit(): void {
+    if (this.router.url.startsWith('/edit')) {
+      this.isNewProduct = false;
+      const id = this.route.snapshot.params['id'];
+      this.productService.getProductById(id).subscribe(data => {
+        this.productForm.patchValue(data);
+      })
+    }
   }
 
   protected getProductType() {
@@ -111,7 +127,7 @@ export class ProductFormComponent {
         && this.productForm.controls.warrantyLength.valid
         && this.productForm.controls.manufacturerName.valid
         && this.productForm.controls.manufacturerName.valid
-        && this.productForm.controls.partLink.valid;
+        && this.productForm.controls.linkToPartOnManufacturerWebsite.valid;
     } else if (this.getProductType() === "PERIPHERAL") {
       partialValid = this.productForm.controls.peripheralType.valid;
     } else if (this.getProductType() === "SOFTWARE") {

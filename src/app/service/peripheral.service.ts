@@ -11,6 +11,10 @@ export class PeripheralService {
 
   protected url = environment.apiUrl + '/peripheral';
 
+  getPeripherals() {
+    return this.http.get(this.url + '/all');
+  }
+
   createPeripheral(data: any) {
     return this.http.post(this.url, data);
   }

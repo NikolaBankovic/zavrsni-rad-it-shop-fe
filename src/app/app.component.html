@@ -2,9 +2,11 @@
   <mat-toolbar-row>
     <h1 id="title" [routerLink]="'/home'">{{ title }}</h1>
     <div class="left-buttons">
-      <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
+      <a *ngIf="authService.isAdmin()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
     </div>
-    <div class="spacer"></div>
+    <div class="spacer">
+      <app-category-nav></app-category-nav>
+    </div>
     <div class="right-buttons">
       <a mat-button routerLinkActive="mat-btn-active" [routerLink]="'/cart'">
         <mat-icon>shopping_cart</mat-icon>

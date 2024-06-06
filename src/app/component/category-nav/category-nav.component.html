@@ -1,0 +1,12 @@
+<div class="category-container">
+  <div *ngFor="let category of categories" class="category-item" (mouseenter)="showSubCategories(category)" (mouseleave)="hideSubCategories(category)">
+    <div class="category-name" (click)="onCategoryClick(category.name)">
+      {{ category.name }}
+    </div>
+    <div *ngIf="category.showSubCategories" class="sub-category-box">
+      <div *ngFor="let subCategory of category.subCategories" class="sub-category-item" (click)="onSubCategoryClick(subCategory)">
+        {{ subCategory }}
+      </div>
+    </div>
+  </div>
+</div>
