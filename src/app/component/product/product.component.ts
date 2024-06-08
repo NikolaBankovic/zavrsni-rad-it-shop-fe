@@ -49,11 +49,11 @@ export class ProductComponent {
     })
   }
 
-  getImageSrc(base64String: string): string {
+  protected getImageSrc(base64String: string): string {
     return `data:image/png;base64,${base64String}`;
   }
 
-  addToCart(product: Product) {
+  protected addToCart(product: Product) {
     this.cartService.addItem(product.id, 1).subscribe({
       next: (cart) => {
         console.log(`${product.name} added to cart`);

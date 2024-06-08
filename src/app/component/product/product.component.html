@@ -23,7 +23,7 @@
     <mat-card-actions>
       <button mat-raised-button color="primary">BUY NOW</button>
       <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
-      <button *ngIf="authService.isAdmin()" [routerLink]="['/edit-product', product.id]" mat-button>EDIT</button>
+      <button *ngIf="authService.isAdmin()" [routerLink]="['/edit-product', product.id]" mat-raised-button color="primary">EDIT</button>
     </mat-card-actions>
   </mat-card>
 </div>

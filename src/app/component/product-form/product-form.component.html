@@ -116,6 +116,11 @@
           <br>
         </div>
         <div class="submit-button-container">
+          <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Choose File</button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+          <br>
+        </div>
+        <div class="submit-button-container">
           <button mat-raised-button type="submit" [disabled]="!isFormValid()">Submit</button>
         </div>
       </form>

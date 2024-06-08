@@ -1,25 +1,30 @@
-<div *ngIf="products.length > 0; else noProducts" class="products-grid">
-  <div *ngFor="let product of products" class="product-card">
-    <div class="product-image-container">
-      <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}" class="product-image" />
-    </div>
-    <div class="product-info-container">
-      <div class="product-info">
-        <h2 [routerLink]="['/product', product.id]">{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p>Price: ${{ product.price }}</p>
-        <p *ngIf="product.pcType">Type: {{ product.pcType }}</p>
-        <p *ngIf="product.pcPartType">Type: {{ product.pcPartType }}</p>
-        <p *ngIf="product.peripheralType">Type: {{ product.peripheralType }}</p>
-        <p *ngIf="product.softwareType">Type: {{ product.softwareType }}</p>
-        <p *ngIf="product.usedState">State: {{ product.usedState }}</p>
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div *ngIf="products.length > 0; else noProducts" class="products-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <div class="product-image-container">
+        <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}" class="product-image" />
       </div>
-      <div class="button-container">
-        <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
+      <div class="product-info-container">
+        <div class="product-info">
+          <h2 [routerLink]="['/product', product.id]">{{ product.name }}</h2>
+          <p>{{ product.description | truncate:200 }}</p>
+          <p>Price: ${{ product.price }}</p>
+          <p *ngIf="product.pcType">Type: {{ product.pcType }}</p>
+          <p *ngIf="product.pcPartType">Type: {{ product.pcPartType }}</p>
+          <p *ngIf="product.peripheralType">Type: {{ product.peripheralType }}</p>
+          <p *ngIf="product.softwareType">Type: {{ product.softwareType }}</p>
+          <p *ngIf="product.usedState">State: {{ product.usedState }}</p>
+        </div>
+        <div class="button-container">
+          <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
+        </div>
       </div>
     </div>
   </div>
+  <ng-template #noProducts>
+    <p>No products available.</p>
+  </ng-template>
 </div>
-<ng-template #noProducts>
-  <p>No products available.</p>
-</ng-template>

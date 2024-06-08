@@ -21,4 +21,8 @@ export class AppNavigation {
       this.router.navigate(['/product'], {queryParams: {category: category}});
     });
   }
+
+  public navigateToProduct(id: number) {
+    this.router.navigate(['/product', id]);
+  }
 }

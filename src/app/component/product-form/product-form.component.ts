@@ -13,6 +13,7 @@ import {PeripheralService} from "../../service/peripheral.service";
 import {SoftwareService} from "../../service/software.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../service/product.service";
+import {AppNavigation} from "../../app.navigation";
 
 @Component({
   selector: 'app-product-form',
@@ -38,6 +39,7 @@ import {ProductService} from "../../service/product.service";
 export class ProductFormComponent {
 
   private readonly router = inject(Router);
+  private readonly navigation = inject(AppNavigation)
   private readonly route = inject(ActivatedRoute);
   private readonly productService = inject(ProductService);
   private readonly codebookService = inject(CodebookService);
@@ -53,6 +55,7 @@ export class ProductFormComponent {
   protected peripheralTypes: string[] = [];
   protected softwareTypes: string[] = [];
   protected usedStates: string[] = [];
+  protected selectedFile: File | null = null;
 
   protected productForm = new FormGroup({
     'productType': new FormControl(null, Validators.required),
@@ -93,22 +96,46 @@ export class ProductFormComponent {
     return this.productForm.controls.productType.value;
   }
 
+  protected onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   protected onSubmit() {
-    if (this.getProductType() == "PC") {
-      this.pcService.createPC(this.productForm.value).subscribe(data => {
-        console.log(data);
+    const formData = new FormData();
+    const productType = this.getProductType();
+    const dto = new Blob([JSON.stringify(this.productForm.value)], { type: 'application/json' });
+
+    if (productType === "PC") {
+      formData.append('pcDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.pcService.createPC(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
-    } else if (this.getProductType() == "PC_PART") {
-      this.pcPartService.createPCPart(this.productForm.value).subscribe(data => {
-        console.log(data);
+    } else if (productType === "PC_PART") {
+      formData.append('pcPartDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.pcPartService.createPCPart(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
-    } else if (this.getProductType() == "PERIPHERAL") {
-      this.peripheralService.createPeripheral(this.productForm.value).subscribe(data => {
-        console.log(data);
+    } else if (productType === "PERIPHERAL") {
+      formData.append('peripheralDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.peripheralService.createPeripheral(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
-    } else if (this.getProductType() == "SOFTWARE") {
-      this.softwareService.createSoftware(this.productForm.value).subscribe(data => {
-        console.log(data);
+    } else if (productType === "SOFTWARE") {
+      formData.append('softwareDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.softwareService.createSoftware(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
     }
   }
