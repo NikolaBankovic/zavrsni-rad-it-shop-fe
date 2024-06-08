@@ -7,7 +7,7 @@
     </mat-card-header>
     <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}"/>
     <mat-card-content>
-      <p>{{ product.description }}</p>
+      <p [innerHTML]="product.description | newlineToBreak"></p>
       <p><strong>Price:</strong> ${{ product.price }}</p>
       <p *ngIf="product.pcType"><strong>PC Type:</strong> {{ product.pcType }}</p>
       <p *ngIf="product.pcPartType"><strong>PC Part Type:</strong> {{ product.pcPartType }}</p>
@@ -21,8 +21,8 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>BUY NOW</button>
-      <button mat-button>ADD TO CART</button>
+      <button mat-raised-button color="primary">BUY NOW</button>
+      <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
       <button *ngIf="authService.isAdmin()" [routerLink]="['/edit-product', product.id]" mat-button>EDIT</button>
     </mat-card-actions>
   </mat-card>
