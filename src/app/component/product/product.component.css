@@ -2,11 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 5%;
+  width: 90%;
 }
 
 mat-card {
-  max-width: 400px;
+  max-width: 100%;
   width: 100%;
 }
 
@@ -16,8 +17,11 @@ mat-card {
 }
 
 mat-card img {
-  max-height: 300px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
+  display: block;
+  margin: 0 auto;
 }
 
 mat-card-title,

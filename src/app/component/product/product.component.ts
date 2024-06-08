@@ -14,6 +14,7 @@ import {
 } from "@angular/material/card";
 import {NgIf} from "@angular/common";
 import {AuthService} from "../../service/auth.service";
+import {NewlineToBreakPipe} from "../../pipe/newline-to-break.pipe";
 
 @Component({
   selector: 'app-product',
@@ -27,7 +28,8 @@ import {AuthService} from "../../service/auth.service";
     MatCardTitle,
     MatCardHeader,
     MatCard,
-    NgIf
+    NgIf,
+    NewlineToBreakPipe
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'

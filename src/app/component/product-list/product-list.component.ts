@@ -36,8 +36,6 @@ export class ProductListComponent {
   ngOnInit() {
     const category = this.route.snapshot.queryParams['category'];
 
-    console.log(category)
-
     if (category === 'PC') {
       this.pcService.getPCs().subscribe(data => {
         this.products = data as Product[];

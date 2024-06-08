@@ -1,4 +1,4 @@
-<div>
+<div class="form-container">
   <div>
     <div>
       <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
@@ -34,80 +34,90 @@
           <mat-error>Product description is required!</mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field *ngIf="getProductType() == 'PERIPHERAL'" appearance="outline">
-          <mat-label>Peripheral type</mat-label>
-          <mat-select formControlName="peripheralType" [compareWith]="compare">
-            <mat-option [value]="peripheralType" *ngFor="let peripheralType of peripheralTypes"> {{ peripheralType }}</mat-option>
-          </mat-select>
-          <mat-hint>Select peripheral type:</mat-hint>
-          <mat-error>Peripheral type is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'SOFTWARE'" appearance="outline">
-          <mat-label>Software type</mat-label>
-          <mat-select formControlName="softwareType" [compareWith]="compare">
-            <mat-option [value]="softwareType" *ngFor="let softwareType of softwareTypes"> {{ softwareType }}</mat-option>
-          </mat-select>
-          <mat-hint>Select software type:</mat-hint>
-          <mat-error>Software type is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'PC'" appearance="outline">
-          <mat-label>PC type</mat-label>
-          <mat-select formControlName="pcType" [compareWith]="compare">
-            <mat-option [value]="pcType" *ngFor="let pcType of pcTypes"> {{ pcType }}</mat-option>
-          </mat-select>
-          <mat-hint>Select PC type:</mat-hint>
-          <mat-error>PC type is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
-          <mat-label>PC part type</mat-label>
-          <mat-select formControlName="pcPartType" [compareWith]="compare">
-            <mat-option [value]="pcPartType" *ngFor="let pcPartType of pcPartTypes"> {{ pcPartType }}</mat-option>
-          </mat-select>
-          <mat-hint>Select PC part type:</mat-hint>
-          <mat-error>PC part type is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
-          <mat-label>Used state</mat-label>
-          <mat-select formControlName="usedState" [compareWith]="compare">
-            <mat-option [value]="usedState" *ngFor="let usedState of usedStates"> {{ usedState }}</mat-option>
-          </mat-select>
-          <mat-hint>Select used state:</mat-hint>
-          <mat-error>Used state is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
-          <mat-label>Warranty length</mat-label>
-          <input type="number" matInput formControlName="warrantyLength">
-          <mat-hint>Enter warranty length:</mat-hint>
-          <mat-error>Warranty length is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
-          <mat-label>Manufacturer name</mat-label>
-          <input matInput formControlName="manufacturerName">
-          <mat-hint>Enter manufacturer name:</mat-hint>
-          <mat-error>Manufacturer name is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
-          <mat-label>Manufacturer catalogue number</mat-label>
-          <input matInput formControlName="manufacturerCatalogueNumber">
-          <mat-hint>Enter manufacturer catalogue number:</mat-hint>
-          <mat-error>Manufacturer catalogue number is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
-          <mat-label>partLink</mat-label>
-          <input matInput formControlName="linkToPartOnManufacturerWebsite">
-          <mat-hint>Enter part link:</mat-hint>
-          <mat-error>Part link is required!</mat-error>
-        </mat-form-field>
-        <br>
-        <button mat-raised-button type="submit" [disabled]="!isFormValid()">Submit</button>
+        <div *ngIf="getProductType() == 'PERIPHERAL'">
+          <mat-form-field *ngIf="getProductType() == 'PERIPHERAL'" appearance="outline">
+            <mat-label>Peripheral type</mat-label>
+            <mat-select formControlName="peripheralType" [compareWith]="compare">
+              <mat-option [value]="peripheralType" *ngFor="let peripheralType of peripheralTypes"> {{ peripheralType }}</mat-option>
+            </mat-select>
+            <mat-hint>Select peripheral type:</mat-hint>
+            <mat-error>Peripheral type is required!</mat-error>
+          </mat-form-field>
+          <br>
+        </div>
+        <div *ngIf="getProductType() == 'SOFTWARE'">
+          <mat-form-field *ngIf="getProductType() == 'SOFTWARE'" appearance="outline">
+            <mat-label>Software type</mat-label>
+            <mat-select formControlName="softwareType" [compareWith]="compare">
+              <mat-option [value]="softwareType" *ngFor="let softwareType of softwareTypes"> {{ softwareType }}</mat-option>
+            </mat-select>
+            <mat-hint>Select software type:</mat-hint>
+            <mat-error>Software type is required!</mat-error>
+          </mat-form-field>
+          <br>
+        </div>
+        <div *ngIf="getProductType() == 'PC'">
+          <mat-form-field *ngIf="getProductType() == 'PC'" appearance="outline">
+            <mat-label>PC type</mat-label>
+            <mat-select formControlName="pcType" [compareWith]="compare">
+              <mat-option [value]="pcType" *ngFor="let pcType of pcTypes"> {{ pcType }}</mat-option>
+            </mat-select>
+            <mat-hint>Select PC type:</mat-hint>
+            <mat-error>PC type is required!</mat-error>
+          </mat-form-field>
+          <br>
+        </div>
+        <div *ngIf="getProductType() == 'PC_PART'">
+          <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
+            <mat-label>PC part type</mat-label>
+            <mat-select formControlName="pcPartType" [compareWith]="compare">
+              <mat-option [value]="pcPartType" *ngFor="let pcPartType of pcPartTypes"> {{ pcPartType }}</mat-option>
+            </mat-select>
+            <mat-hint>Select PC part type:</mat-hint>
+            <mat-error>PC part type is required!</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
+            <mat-label>Used state</mat-label>
+            <mat-select formControlName="usedState" [compareWith]="compare">
+              <mat-option [value]="usedState" *ngFor="let usedState of usedStates"> {{ usedState }}</mat-option>
+            </mat-select>
+            <mat-hint>Select used state:</mat-hint>
+            <mat-error>Used state is required!</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
+            <mat-label>Warranty length</mat-label>
+            <input type="number" matInput formControlName="warrantyLength">
+            <mat-hint>Enter warranty length:</mat-hint>
+            <mat-error>Warranty length is required!</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
+            <mat-label>Manufacturer name</mat-label>
+            <input matInput formControlName="manufacturerName">
+            <mat-hint>Enter manufacturer name:</mat-hint>
+            <mat-error>Manufacturer name is required!</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
+            <mat-label>Manufacturer catalogue number</mat-label>
+            <input matInput formControlName="manufacturerCatalogueNumber">
+            <mat-hint>Enter manufacturer catalogue number:</mat-hint>
+            <mat-error>Manufacturer catalogue number is required!</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
+            <mat-label>partLink</mat-label>
+            <input matInput formControlName="linkToPartOnManufacturerWebsite">
+            <mat-hint>Enter part link:</mat-hint>
+            <mat-error>Part link is required!</mat-error>
+          </mat-form-field>
+          <br>
+        </div>
+        <div class="submit-button-container">
+          <button mat-raised-button type="submit" [disabled]="!isFormValid()">Submit</button>
+        </div>
       </form>
     </div>
   </div>
