@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Cart, CartItem, CartService} from '../../service/cart.service';
 import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -32,30 +32,21 @@ export class CartComponent {
     this.loadCart();
   }
 
-  loadCart() {
+  protected loadCart() {
     this.cartService.viewCart().subscribe(cart => {
       this.cart = cart;
       this.calculateTotalCost();
     });
   }
 
-  addItem() {
-    this.cartService.addItem(this.newProductId, this.newQuantity).subscribe(cart => {
-      this.cart = cart;
-      this.calculateTotalCost()
-      this.newProductId = 0;
-      this.newQuantity = 0;
-    });
-  }
-
-  removeItem(productId: number) {
+  protected removeItem(productId: number) {
     this.cartService.removeItem(productId).subscribe(cart => {
       this.cart = cart;
       this.calculateTotalCost();
     });
   }
 
-  clearCart() {
+  protected clearCart() {
     this.cartService.clearCart().subscribe(cart => {
       this.cart = cart;
       this.totalCost = 0;
@@ -77,13 +68,13 @@ export class CartComponent {
     }
   }
 
-  calculateTotalCost() {
+  protected calculateTotalCost() {
     if (this.cart) {
       this.totalCost = this.cart.cartItemList.reduce((total, item) => total + (item.product.price * item.quantity), 0);
     }
   }
 
-  getImageSrc(base64String: string): string {
+  protected getImageSrc(base64String: string): string {
     return `data:image/png;base64,${base64String}`;
   }
 }

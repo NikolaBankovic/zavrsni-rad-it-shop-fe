@@ -11,6 +11,10 @@ export class SoftwareService {
 
   protected url = environment.apiUrl + '/software';
 
+  getSoftware() {
+    return this.http.get(this.url + '/all');
+  }
+
   createSoftware(data: any) {
     return this.http.post(this.url, data);
   }

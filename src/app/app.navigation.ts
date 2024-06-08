@@ -15,4 +15,14 @@ export class AppNavigation {
   public navigateToLogin() {
     this.router.navigate(['/login']);
   }
+
+  public navigateToProductList(category: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true }).then(() => {
+      this.router.navigate(['/product'], {queryParams: {category: category}});
+    });
+  }
+
+  public navigateToProduct(id: number) {
+    this.router.navigate(['/product', id]);
+  }
 }

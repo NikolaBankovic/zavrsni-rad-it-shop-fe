@@ -7,6 +7,7 @@ import {adminGuard} from "./guard/admin.guard";
 import {notLoggedInGuard} from "./guard/not-logged-in.guard";
 import {CartComponent} from "./component/cart/cart.component";
 import {ProductComponent} from "./component/product/product.component";
+import {ProductListComponent} from "./component/product-list/product-list.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'create-product', component: ProductFormComponent, canActivate: [adminGuard] },
   { path: 'edit-product/:id', component: ProductFormComponent, canActivate: [adminGuard]  },
   { path: 'product/:id', component: ProductComponent },
+  { path: 'product' , component: ProductListComponent},
   { path: 'cart', component: CartComponent }
 ];

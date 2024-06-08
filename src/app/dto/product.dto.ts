@@ -1,5 +1,6 @@
 export class Product {
   id!: number;
+  productType!: string;
   name!: string;
   price!: number;
   description!: string;

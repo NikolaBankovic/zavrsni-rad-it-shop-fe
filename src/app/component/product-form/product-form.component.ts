@@ -11,6 +11,9 @@ import {PCService} from "../../service/pc.service";
 import {PcPartService} from "../../service/pc-part.service";
 import {PeripheralService} from "../../service/peripheral.service";
 import {SoftwareService} from "../../service/software.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ProductService} from "../../service/product.service";
+import {AppNavigation} from "../../app.navigation";
 
 @Component({
   selector: 'app-product-form',
@@ -35,18 +38,24 @@ import {SoftwareService} from "../../service/software.service";
 })
 export class ProductFormComponent {
 
+  private readonly router = inject(Router);
+  private readonly navigation = inject(AppNavigation)
+  private readonly route = inject(ActivatedRoute);
+  private readonly productService = inject(ProductService);
   private readonly codebookService = inject(CodebookService);
   private readonly pcService = inject(PCService);
   private readonly pcPartService = inject(PcPartService);
   private readonly peripheralService = inject(PeripheralService);
   private readonly softwareService = inject(SoftwareService);
 
+  protected isNewProduct: boolean = true;
   protected productTypes: string[] = [];
   protected pcTypes: string[] = [];
   protected pcPartTypes: string[] = [];
   protected peripheralTypes: string[] = [];
   protected softwareTypes: string[] = [];
   protected usedStates: string[] = [];
+  protected selectedFile: File | null = null;
 
   protected productForm = new FormGroup({
     'productType': new FormControl(null, Validators.required),
@@ -61,7 +70,7 @@ export class ProductFormComponent {
     'warrantyLength': new FormControl(null, Validators.required),
     'manufacturerName': new FormControl(null, Validators.required),
     'manufacturerCatalogueNumber': new FormControl(null, Validators.required),
-    'partLink': new FormControl(null, Validators.required)
+    'linkToPartOnManufacturerWebsite': new FormControl(null, Validators.required)
   });
 
   constructor() {
@@ -73,26 +82,60 @@ export class ProductFormComponent {
     this.codebookService.getUsedStates().subscribe(data => this.usedStates = data);
   }
 
+  ngOnInit(): void {
+    if (this.router.url.startsWith('/edit')) {
+      this.isNewProduct = false;
+      const id = this.route.snapshot.params['id'];
+      this.productService.getProductById(id).subscribe(data => {
+        this.productForm.patchValue(data);
+      })
+    }
+  }
+
   protected getProductType() {
     return this.productForm.controls.productType.value;
   }
 
+  protected onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   protected onSubmit() {
-    if (this.getProductType() == "PC") {
-      this.pcService.createPC(this.productForm.value).subscribe(data => {
-        console.log(data);
+    const formData = new FormData();
+    const productType = this.getProductType();
+    const dto = new Blob([JSON.stringify(this.productForm.value)], { type: 'application/json' });
+
+    if (productType === "PC") {
+      formData.append('pcDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.pcService.createPC(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
-    } else if (this.getProductType() == "PC_PART") {
-      this.pcPartService.createPCPart(this.productForm.value).subscribe(data => {
-        console.log(data);
+    } else if (productType === "PC_PART") {
+      formData.append('pcPartDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.pcPartService.createPCPart(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
-    } else if (this.getProductType() == "PERIPHERAL") {
-      this.peripheralService.createPeripheral(this.productForm.value).subscribe(data => {
-        console.log(data);
+    } else if (productType === "PERIPHERAL") {
+      formData.append('peripheralDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.peripheralService.createPeripheral(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
-    } else if (this.getProductType() == "SOFTWARE") {
-      this.softwareService.createSoftware(this.productForm.value).subscribe(data => {
-        console.log(data);
+    } else if (productType === "SOFTWARE") {
+      formData.append('softwareDto', dto);
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+      this.softwareService.createSoftware(formData).subscribe((data: any) => {
+        this.navigation.navigateToProduct(data.id);
       });
     }
   }
@@ -111,7 +154,7 @@ export class ProductFormComponent {
         && this.productForm.controls.warrantyLength.valid
         && this.productForm.controls.manufacturerName.valid
         && this.productForm.controls.manufacturerName.valid
-        && this.productForm.controls.partLink.valid;
+        && this.productForm.controls.linkToPartOnManufacturerWebsite.valid;
     } else if (this.getProductType() === "PERIPHERAL") {
       partialValid = this.productForm.controls.peripheralType.valid;
     } else if (this.getProductType() === "SOFTWARE") {
