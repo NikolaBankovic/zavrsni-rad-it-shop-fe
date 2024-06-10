@@ -4,7 +4,7 @@
       {{ category.name }}
     </div>
     <div *ngIf="category.showSubCategories" class="sub-category-box">
-      <div *ngFor="let subCategory of category.subCategories" class="sub-category-item" (click)="onSubCategoryClick(subCategory)">
+      <div *ngFor="let subCategory of category.subCategories" class="sub-category-item" (click)="onSubCategoryClick(category, subCategory)">
         {{ subCategory }}
       </div>
     </div>

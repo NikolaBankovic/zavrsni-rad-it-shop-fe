@@ -22,6 +22,12 @@ export class AppNavigation {
     });
   }
 
+  public navigateToProductListWithSubCategory(category: string, subCategory: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true }).then(() => {
+      this.router.navigate(['/product'], {queryParams: {category: category, subCategory: subCategory}});
+    });
+  }
+
   public navigateToProduct(id: number) {
     this.router.navigate(['/product', id]);
   }

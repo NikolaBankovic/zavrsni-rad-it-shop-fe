@@ -1,4 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {MatIcon} from "@angular/material/icon";
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
@@ -24,12 +24,23 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCart();
+    this.cartService.getCartItemCount().subscribe(count => {
+      this.cartItemCount = count;
+    });
   }
 
   loadCart(): void {
     this.cartService.viewCart().subscribe(cart => {
       this.cartItemCount = cart.cartItemList.length;
     });
+  }
+
+  currentUsername(): string{
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      return user.username;
+    }
+    return '';
   }
 
   logout() {
