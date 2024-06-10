@@ -40,7 +40,7 @@ export class CategoryNavComponent {
     this.navigation.navigateToProductList(categoryName);
   }
 
-  onSubCategoryClick(subCategoryName: string) {
-    this.navigation.navigateToProductList(subCategoryName);
+  onSubCategoryClick(category: Category, subCategory: string) {
+    this.navigation.navigateToProductListWithSubCategory(category.name, subCategory);
   }
 }

@@ -13,6 +13,7 @@
       </a>
       <a *ngIf="authService.isAdmin()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" (click)="logout()"> Logout </a>
+      <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/home'"> {{authService.getCurrentUser()?.username}} </a>
       <a *ngIf="!authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/login'"> Login </a>
       <a *ngIf="!authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/register'"> Register </a>
     </div>

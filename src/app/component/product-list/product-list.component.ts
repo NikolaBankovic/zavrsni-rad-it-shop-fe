@@ -40,9 +40,11 @@ export class ProductListComponent {
 
   ngOnInit() {
     const category = this.route.snapshot.queryParams['category'];
+    const subCategory = this.route.snapshot.queryParams['subCategory'];
+
 
     if (category === 'PC') {
-      this.pcService.getPCs().subscribe(data => {
+      this.pcService.getPCs(subCategory).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {
@@ -50,7 +52,7 @@ export class ProductListComponent {
         this.isLoading = false;
       });
     } else if (category === 'PC_PART') {
-      this.pcPartService.getPCParts().subscribe(data => {
+      this.pcPartService.getPCParts(subCategory).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {
@@ -58,7 +60,7 @@ export class ProductListComponent {
         this.isLoading = false;
       });
     } else if (category === 'PERIPHERAL') {
-      this.peripheralService.getPeripherals().subscribe(data => {
+      this.peripheralService.getPeripherals(subCategory).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {
@@ -66,7 +68,7 @@ export class ProductListComponent {
         this.isLoading = false;
       });
     } else if (category === 'SOFTWARE') {
-      this.softwareService.getSoftware().subscribe(data => {
+      this.softwareService.getSoftware(subCategory).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {

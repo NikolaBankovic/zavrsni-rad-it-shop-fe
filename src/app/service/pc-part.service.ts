@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment.dev";
 
 @Injectable({
@@ -11,8 +11,11 @@ export class PcPartService {
 
   protected url = environment.apiUrl + '/pc-part';
 
-  getPCParts() {
-    return this.http.get(this.url + '/all');
+  getPCParts(subCategory: string) {
+    let params = new HttpParams();
+    if(subCategory != undefined)
+      params = params.append('pcPartType', subCategory);
+    return this.http.get(this.url + '/all', {params : params});
   }
 
   createPCPart(data: any) {

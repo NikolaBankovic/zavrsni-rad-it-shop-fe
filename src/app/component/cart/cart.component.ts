@@ -4,6 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,8 @@ import {MatIcon} from "@angular/material/icon";
     NgForOf,
     MatButton,
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    RouterLink
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
@@ -22,9 +24,6 @@ import {MatIcon} from "@angular/material/icon";
 export class CartComponent {
   cart: Cart | undefined;
   totalCost: number = 0;
-
-  newProductId: number = 0;
-  newQuantity: number = 0;
 
   constructor(private cartService: CartService) { }
 

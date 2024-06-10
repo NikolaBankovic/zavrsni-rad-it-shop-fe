@@ -5,13 +5,13 @@
   <div *ngIf="products.length > 0; else noProducts" class="products-grid">
     <div *ngFor="let product of products" class="product-card">
       <div class="product-image-container">
-        <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}" class="product-image" />
+        <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}" class="product-image" [routerLink]="['/product', product.id]"/>
       </div>
       <div class="product-info-container">
         <div class="product-info">
           <h2 [routerLink]="['/product', product.id]">{{ product.name }}</h2>
           <p>{{ product.description | truncate:200 }}</p>
-          <p>Price: ${{ product.price }}</p>
+          <p>Price: €{{ product.price }}</p>
           <p *ngIf="product.pcType">Type: {{ product.pcType }}</p>
           <p *ngIf="product.pcPartType">Type: {{ product.pcPartType }}</p>
           <p *ngIf="product.peripheralType">Type: {{ product.peripheralType }}</p>

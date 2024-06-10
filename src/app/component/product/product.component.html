@@ -8,7 +8,7 @@
     <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}"/>
     <mat-card-content>
       <p [innerHTML]="product.description | newlineToBreak"></p>
-      <p><strong>Price:</strong> ${{ product.price }}</p>
+      <p><strong>Price:</strong> €{{ product.price }}</p>
       <p *ngIf="product.pcType"><strong>PC Type:</strong> {{ product.pcType }}</p>
       <p *ngIf="product.pcPartType"><strong>PC Part Type:</strong> {{ product.pcPartType }}</p>
       <p *ngIf="product.peripheralType"><strong>Peripheral Type:</strong> {{ product.peripheralType }}</p>
