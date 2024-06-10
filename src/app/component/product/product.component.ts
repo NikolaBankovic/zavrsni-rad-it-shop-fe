@@ -47,6 +47,7 @@ export class ProductComponent {
     this.productService.getProductById(id).subscribe(data => {
       this.product = data as Product;
     })
+    this.productService.incrementProductTimesVisited(id).subscribe();
   }
 
   protected getImageSrc(base64String: string): string {

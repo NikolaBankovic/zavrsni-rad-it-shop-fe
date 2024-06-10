@@ -11,11 +11,26 @@ export class PeripheralService {
 
   protected url = environment.apiUrl + '/peripheral';
 
-  getPeripherals(subCategory: string) {
+  getPeripherals(subCategory: string, formData: any) {
     let params = new HttpParams();
     if(subCategory != undefined)
       params = params.append('peripheralType', subCategory);
+    if(formData != null) {
+      if(formData.name != null){
+        params = params.append('name', formData.name);
+      }
+      if(formData.priceFrom != null){
+        params = params.append('priceFrom', formData.priceFrom);
+      }
+      if(formData.priceTo != null){
+        params = params.append('priceTo', formData.priceTo);
+      }
+    }
     return this.http.get(this.url + '/all', {params : params});
+  }
+
+  getTopPeripherals() {
+    return this.http.get(this.url + '/top');
   }
 
   createPeripheral(data: any) {
