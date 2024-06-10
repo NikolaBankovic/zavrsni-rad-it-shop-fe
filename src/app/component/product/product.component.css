@@ -1,0 +1,39 @@
+.product-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+  width: 90%;
+}
+
+mat-card {
+  max-width: 100%;
+  width: 100%;
+}
+
+.product-image {
+  background-size: cover;
+  background-position: center;
+}
+
+mat-card img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+mat-card-title,
+mat-card-subtitle {
+  text-align: left;
+}
+
+mat-card-content p {
+  margin: 0 0 10px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
