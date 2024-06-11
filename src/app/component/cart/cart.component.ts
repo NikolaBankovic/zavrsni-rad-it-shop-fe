@@ -9,7 +9,6 @@ import {OrderService} from "../../service/order.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {AppNavigation} from "../../app.navigation";
-import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-cart',
