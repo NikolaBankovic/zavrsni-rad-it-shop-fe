@@ -10,6 +10,8 @@ import {PCService} from "../../service/pc.service";
 import {PcPartService} from "../../service/pc-part.service";
 import {PeripheralService} from "../../service/peripheral.service";
 import {SoftwareService} from "../../service/software.service";
+import {AuthService} from "../../service/auth.service";
+import {AppNavigation} from "../../app.navigation";
 
 @Component({
   selector: 'app-home',
@@ -27,11 +29,14 @@ import {SoftwareService} from "../../service/software.service";
 })
 export class HomeComponent {
 
+  private readonly navigation = inject(AppNavigation);
+  private readonly authService = inject(AuthService);
   private readonly pcService = inject(PCService);
   private readonly pcPartService = inject(PcPartService)
   private readonly peripheralService = inject(PeripheralService)
   private readonly softwareService = inject(SoftwareService);
   private readonly cartService = inject(CartService);
+
   pcs: Product[] = [];
   pcParts: Product[] = [];
   peripherals: Product[] = [];
@@ -79,14 +84,18 @@ export class HomeComponent {
   }
 
   protected addToCart(product: Product) {
-    this.cartService.addItem(product.id, 1).subscribe({
-      next: (cart) => {
-        console.log(`${product.name} added to cart`);
-        console.log(cart);
-      },
-      error: (err) => {
-        console.error('Error adding product to cart', err);
-      }
-    });
+    if (this.authService.isLoggedIn()) {
+      this.cartService.addItem(product.id, 1).subscribe({
+        next: (cart) => {
+          console.log(`${product.name} added to cart`);
+          console.log(cart);
+        },
+        error: (err) => {
+          console.error('Error adding product to cart', err);
+        }
+      });
+    } else {
+      this.navigation.navigateToLogin();
+    }
   }
 }

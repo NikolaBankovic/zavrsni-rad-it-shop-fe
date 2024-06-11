@@ -13,6 +13,8 @@ import {TruncatePipe} from "../../pipe/truncate.pipe";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {ProductFilterComponent} from "../product-filter/product-filter.component";
+import {AppNavigation} from "../../app.navigation";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-product-list',
@@ -35,6 +37,8 @@ import {ProductFilterComponent} from "../product-filter/product-filter.component
 export class ProductListComponent {
 
   private readonly route = inject(ActivatedRoute);
+  private readonly navigation = inject(AppNavigation);
+  private readonly authService = inject(AuthService);
   private readonly productService = inject(ProductService);
   private readonly pcService = inject(PCService);
   private readonly pcPartService = inject(PcPartService);
@@ -57,15 +61,19 @@ export class ProductListComponent {
   }
 
   protected addToCart(product: Product) {
-    this.cartService.addItem(product.id, 1).subscribe({
-      next: (cart) => {
-        console.log(`${product.name} added to cart`);
-        console.log(cart);
-      },
-      error: (err) => {
-        console.error('Error adding product to cart', err);
-      }
-    });
+    if (this.authService.isLoggedIn()) {
+      this.cartService.addItem(product.id, 1).subscribe({
+        next: (cart) => {
+          console.log(`${product.name} added to cart`);
+          console.log(cart);
+        },
+        error: (err) => {
+          console.error('Error adding product to cart', err);
+        }
+      });
+    } else {
+      this.navigation.navigateToLogin();
+    }
   }
 
   protected loadItems(filterData: any): void {

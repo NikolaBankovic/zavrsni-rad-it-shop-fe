@@ -1,10 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Cart, CartItem, CartService} from '../../service/cart.service';
 import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
+import {OrderService} from "../../service/order.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {AppNavigation} from "../../app.navigation";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-cart',
@@ -25,7 +30,10 @@ export class CartComponent {
   cart: Cart | undefined;
   totalCost: number = 0;
 
-  constructor(private cartService: CartService) { }
+  private readonly cartService = inject(CartService);
+  private readonly orderService = inject(OrderService);
+  private readonly navigation = inject(AppNavigation);
+  private readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.loadCart();
@@ -51,6 +59,18 @@ export class CartComponent {
       this.totalCost = 0;
     });
   }
+
+  protected createOrder() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {});
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.orderService.createOrder().subscribe((data: any) => {
+          this.navigation.navigateToOrderDetails(data.id);
+        });
+      }
+    })
+  }
+
   incrementQuantity(item: CartItem) {
     this.cartService.addItem(item.product.id, 1).subscribe(cart => {
       this.cart = cart;

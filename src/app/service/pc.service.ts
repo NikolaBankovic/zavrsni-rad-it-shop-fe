@@ -36,4 +36,8 @@ export class PCService {
   createPC(data: any) {
     return this.http.post(this.url, data);
   }
+
+  editPC(id:number, data: any) {
+    return this.http.put(this.url + `/${id}`, data);
+  }
 }

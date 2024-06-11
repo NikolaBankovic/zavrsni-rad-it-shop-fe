@@ -15,6 +15,7 @@ import {
 import {NgIf} from "@angular/common";
 import {AuthService} from "../../service/auth.service";
 import {NewlineToBreakPipe} from "../../pipe/newline-to-break.pipe";
+import {AppNavigation} from "../../app.navigation";
 
 @Component({
   selector: 'app-product',
@@ -36,6 +37,7 @@ import {NewlineToBreakPipe} from "../../pipe/newline-to-break.pipe";
 })
 export class ProductComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly navigation = inject(AppNavigation);
   private readonly productService = inject(ProductService);
   private readonly cartService = inject(CartService);
 
@@ -55,15 +57,19 @@ export class ProductComponent {
   }
 
   protected addToCart(product: Product) {
-    this.cartService.addItem(product.id, 1).subscribe({
-      next: (cart) => {
-        console.log(`${product.name} added to cart`);
-        console.log(cart);
-      },
-      error: (err) => {
-        console.error('Error adding product to cart', err);
-      }
-    });
+    if (this.authService.isLoggedIn()) {
+      this.cartService.addItem(product.id, 1).subscribe({
+        next: (cart) => {
+          console.log(`${product.name} added to cart`);
+          console.log(cart);
+        },
+        error: (err) => {
+          console.error('Error adding product to cart', err);
+        }
+      });
+    } else {
+      this.navigation.navigateToLogin();
+    }
   }
 
 }
