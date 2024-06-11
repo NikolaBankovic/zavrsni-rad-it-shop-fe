@@ -19,7 +19,7 @@ export class ProductService {
     return this.http.get(this.url + `/${id}`);
   }
 
-  getProductsByCategory(category: string) {
-    return this.http.get(this.url + '/category/' + category);
+  incrementProductTimesVisited(id: number) {
+    return this.http.patch(this.url + `/${id}`, null);
   }
 }

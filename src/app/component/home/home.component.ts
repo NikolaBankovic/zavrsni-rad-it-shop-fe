@@ -1,5 +1,4 @@
 import {Component, inject} from '@angular/core';
-import {ProductService} from "../../service/product.service";
 import {Product} from "../../dto/product.dto";
 import {NgForOf, NgIf} from "@angular/common";
 import {CartService} from "../../service/cart.service";
@@ -7,6 +6,10 @@ import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {TruncatePipe} from "../../pipe/truncate.pipe";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {PCService} from "../../service/pc.service";
+import {PcPartService} from "../../service/pc-part.service";
+import {PeripheralService} from "../../service/peripheral.service";
+import {SoftwareService} from "../../service/software.service";
 
 @Component({
   selector: 'app-home',
@@ -24,9 +27,15 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 })
 export class HomeComponent {
 
-  private readonly productService = inject(ProductService);
+  private readonly pcService = inject(PCService);
+  private readonly pcPartService = inject(PcPartService)
+  private readonly peripheralService = inject(PeripheralService)
+  private readonly softwareService = inject(SoftwareService);
   private readonly cartService = inject(CartService);
-  products: Product[] = [];
+  pcs: Product[] = [];
+  pcParts: Product[] = [];
+  peripherals: Product[] = [];
+  software: Product[] = [];
   isLoading: boolean = true;
 
   ngOnInit() {
@@ -34,13 +43,35 @@ export class HomeComponent {
   }
 
   protected loadProducts(): void {
-    this.productService.getProducts().subscribe(data => {
-      this.products = data as Product[];
+    this.pcService.getTopPCs().subscribe(data => {
+      this.pcs = data as Product[];
       this.isLoading = false;
     }, error => {
-      console.error('Error loading products', error);
+      console.error('Error loading PC', error);
       this.isLoading = false;
-    });
+    })
+    this.pcPartService.getTopPCParts().subscribe(data => {
+      this.pcParts = data as Product[];
+      this.isLoading = false;
+    }, error => {
+      console.error('Error loading PC', error);
+      this.isLoading = false;
+    })
+    this.peripheralService.getTopPeripherals().subscribe(data => {
+      this.peripherals = data as Product[];
+      this.isLoading = false;
+    }, error => {
+      console.error('Error loading PC', error);
+      this.isLoading = false;
+    })
+    this.softwareService.getTopSoftware().subscribe(data => {
+      this.software = data as Product[];
+      this.isLoading = false;
+    }, error => {
+      console.error('Error loading PC', error);
+      this.isLoading = false;
+    })
+
   }
 
   protected getImageSrc(base64String: string): string {
