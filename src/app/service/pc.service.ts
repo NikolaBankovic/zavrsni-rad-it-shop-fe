@@ -11,7 +11,31 @@ export class PCService {
 
   protected url = environment.apiUrl + '/pc';
 
-  getPCs(subCategory: string, formData: any) {
+  getPCs(subCategory: string, formData: any, pageIndex: number, pageSize: number) {
+    let params = this.createParams(subCategory, formData);
+    params = params.append('page', pageIndex);
+    params = params.append('size', pageSize);
+    return this.http.get(this.url + '/all', {params : params});
+  }
+
+  getPCCount(subCategory: string, formData: any) {
+    let params = this.createParams(subCategory, formData);
+    return this.http.get(this.url + '/all/count', {params : params});
+  }
+
+  getTopPCs() {
+    return this.http.get(this.url + '/top');
+  }
+
+  createPC(data: any) {
+    return this.http.post(this.url, data);
+  }
+
+  editPC(id:number, data: any) {
+    return this.http.put(this.url + `/${id}`, data);
+  }
+
+  private createParams(subCategory: string, formData: any) {
     let params = new HttpParams();
     if(subCategory != undefined)
       params = params.append('pcType', subCategory);
@@ -26,18 +50,6 @@ export class PCService {
         params = params.append('priceTo', formData.priceTo);
       }
     }
-    return this.http.get(this.url + '/all', {params : params});
-  }
-
-  getTopPCs() {
-    return this.http.get(this.url + '/top');
-  }
-
-  createPC(data: any) {
-    return this.http.post(this.url, data);
-  }
-
-  editPC(id:number, data: any) {
-    return this.http.put(this.url + `/${id}`, data);
+    return params;
   }
 }

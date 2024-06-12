@@ -11,7 +11,31 @@ export class SoftwareService {
 
   protected url = environment.apiUrl + '/software';
 
-  getSoftware(subCategory: string, formData: any) {
+  getSoftware(subCategory: string, formData: any, pageIndex: number, pageSize: number) {
+    let params = this.createParams(subCategory, formData);
+    params = params.append('page', pageIndex);
+    params = params.append('size', pageSize);
+    return this.http.get(this.url + '/all', {params : params});
+  }
+
+  getSoftwareCount(subCategory: string, formData: any) {
+    let params = this.createParams(subCategory, formData);
+    return this.http.get(this.url + '/all/count', {params : params});
+  }
+
+  getTopSoftware() {
+    return this.http.get(this.url + '/top');
+  }
+
+  createSoftware(data: any) {
+    return this.http.post(this.url, data);
+  }
+
+  editSoftware(id:number, data: any) {
+    return this.http.put(this.url + `/${id}`, data);
+  }
+
+  private createParams(subCategory: string, formData: any) {
     let params = new HttpParams();
     if(subCategory != undefined)
       params = params.append('softwareType', subCategory);
@@ -26,18 +50,6 @@ export class SoftwareService {
         params = params.append('priceTo', formData.priceTo);
       }
     }
-    return this.http.get(this.url + '/all', {params : params});
-  }
-
-  getTopSoftware() {
-    return this.http.get(this.url + '/top');
-  }
-
-  createSoftware(data: any) {
-    return this.http.post(this.url, data);
-  }
-
-  editSoftware(id:number, data: any) {
-    return this.http.put(this.url + `/${id}`, data);
+    return params;
   }
 }
