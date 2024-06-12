@@ -36,4 +36,8 @@ export class SoftwareService {
   createSoftware(data: any) {
     return this.http.post(this.url, data);
   }
+
+  editSoftware(id:number, data: any) {
+    return this.http.put(this.url + `/${id}`, data);
+  }
 }

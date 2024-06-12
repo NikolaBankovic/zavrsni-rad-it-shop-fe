@@ -48,4 +48,8 @@ export class PcPartService {
   createPCPart(data: any) {
     return this.http.post(this.url, data);
   }
+
+  editPCPart(id:number, data: any) {
+    return this.http.put(this.url + `/${id}`, data);
+  }
 }

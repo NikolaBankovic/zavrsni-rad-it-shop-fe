@@ -36,4 +36,8 @@ export class PeripheralService {
   createPeripheral(data: any) {
     return this.http.post(this.url, data);
   }
+
+  editPeripheral(id:number, data: any) {
+    return this.http.put(this.url + `/${id}`, data);
+  }
 }
