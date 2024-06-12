@@ -11,7 +11,31 @@ export class PcPartService {
 
   protected url = environment.apiUrl + '/pc-part';
 
-  getPCParts(subCategory: string, formData: any) {
+  getPCParts(subCategory: string, formData: any, pageIndex: number, pageSize: number) {
+    let params = this.createParams(subCategory, formData);
+    params = params.append('page', pageIndex);
+    params = params.append('size', pageSize);
+    return this.http.get(this.url + '/all', {params : params});
+  }
+
+  getPCPartCount(subCategory: string, formData: any) {
+    let params = this.createParams(subCategory, formData);
+    return this.http.get(this.url + '/all/count', {params : params});
+  }
+
+  getTopPCParts() {
+    return this.http.get(this.url + '/top');
+  }
+
+  createPCPart(data: any) {
+    return this.http.post(this.url, data);
+  }
+
+  editPCPart(id:number, data: any) {
+    return this.http.put(this.url + `/${id}`, data);
+  }
+
+  private createParams(subCategory: string, formData: any) {
     let params = new HttpParams();
     if(subCategory != undefined)
       params = params.append('pcPartType', subCategory);
@@ -38,18 +62,6 @@ export class PcPartService {
         params = params.append('manufacturerCatalogueNumber', formData.manufacturerCatalogueNumber);
       }
     }
-    return this.http.get(this.url + '/all', {params : params});
-  }
-
-  getTopPCParts() {
-    return this.http.get(this.url + '/top');
-  }
-
-  createPCPart(data: any) {
-    return this.http.post(this.url, data);
-  }
-
-  editPCPart(id:number, data: any) {
-    return this.http.put(this.url + `/${id}`, data);
+    return params;
   }
 }

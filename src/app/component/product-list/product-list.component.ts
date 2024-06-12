@@ -15,6 +15,7 @@ import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/mater
 import {ProductFilterComponent} from "../product-filter/product-filter.component";
 import {AppNavigation} from "../../app.navigation";
 import {AuthService} from "../../service/auth.service";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-product-list',
@@ -29,7 +30,8 @@ import {AuthService} from "../../service/auth.service";
     MatSidenavContent,
     ProductFilterComponent,
     MatSidenav,
-    MatSidenavContainer
+    MatSidenavContainer,
+    MatPaginator
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
@@ -45,15 +47,24 @@ export class ProductListComponent {
   private readonly peripheralService = inject(PeripheralService);
   private readonly softwareService = inject(SoftwareService);
   private readonly cartService = inject(CartService);
+
   products: Product[] = [];
   isLoading: boolean = true;
 
+  length = 0;
+  pageIndex = 0;
+  pageSize = 12;
+  pageSizeOptions = [6, 12, 24, 96];
+
+  filterValue = {}
+
   ngOnInit() {
-    this.loadItems(null)
+    this.loadItems(null, 0, this.pageSize);
   }
 
-  handleFilter(event: any) {
-    this.loadItems(event)
+  handleFilter(filterData: any) {
+    this.filterValue = filterData;
+    this.loadItems(this.filterValue, 0, this.pageSize);
   }
 
   protected getImageSrc(base64String: string): string {
@@ -76,12 +87,20 @@ export class ProductListComponent {
     }
   }
 
-  protected loadItems(filterData: any): void {
+  protected changePage(pageData: any) {
+    this.pageSize = pageData.pageSize;
+    this.loadItems(this.filterValue, pageData.pageIndex, pageData.pageSize);
+  }
+
+  protected loadItems(filterData: any, pageIndex: number, pageSize: number): void {
     const category = this.route.snapshot.queryParams['category'];
     const subCategory = this.route.snapshot.queryParams['subCategory'];
 
     if (category === 'PC') {
-      this.pcService.getPCs(subCategory, filterData).subscribe(data => {
+      this.pcService.getPCCount(subCategory, filterData).subscribe((data: any) => {
+        this.length = data.count;
+      });
+      this.pcService.getPCs(subCategory, filterData, pageIndex, pageSize).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {
@@ -89,7 +108,10 @@ export class ProductListComponent {
         this.isLoading = false;
       });
     } else if (category === 'PC_PART') {
-      this.pcPartService.getPCParts(subCategory, filterData).subscribe(data => {
+      this.pcPartService.getPCPartCount(subCategory, filterData).subscribe((data: any) => {
+        this.length = data.count;
+      });
+      this.pcPartService.getPCParts(subCategory, filterData, pageIndex, pageSize).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {
@@ -97,7 +119,10 @@ export class ProductListComponent {
         this.isLoading = false;
       });
     } else if (category === 'PERIPHERAL') {
-      this.peripheralService.getPeripherals(subCategory, filterData).subscribe(data => {
+      this.peripheralService.getPeripheralCount(subCategory, filterData).subscribe((data: any) => {
+        this.length = data.count;
+      });
+      this.peripheralService.getPeripherals(subCategory, filterData, pageIndex, pageSize).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {
@@ -105,7 +130,10 @@ export class ProductListComponent {
         this.isLoading = false;
       });
     } else if (category === 'SOFTWARE') {
-      this.softwareService.getSoftware(subCategory, filterData).subscribe(data => {
+      this.softwareService.getSoftwareCount(subCategory, filterData).subscribe((data: any) => {
+        this.length = data.count;
+      });
+      this.softwareService.getSoftware(subCategory, filterData, pageIndex, pageSize).subscribe(data => {
         this.products = data as Product[];
         this.isLoading = false;
       }, error => {
