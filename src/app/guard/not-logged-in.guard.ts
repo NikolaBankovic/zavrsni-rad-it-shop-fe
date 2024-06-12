@@ -1,6 +1,7 @@
-import {CanActivateFn} from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import {AuthService} from "../service/auth.service";
 import {inject} from "@angular/core";
+import {map} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AppNavigation} from "../app.navigation";
 
