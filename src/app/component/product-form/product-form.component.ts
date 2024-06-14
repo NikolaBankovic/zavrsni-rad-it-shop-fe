@@ -101,6 +101,7 @@ export class ProductFormComponent {
   }
 
   protected onSubmit() {
+    const id = this.route.snapshot.params['id'];
     const formData = new FormData();
     const productType = this.getProductType();
     const dto = new Blob([JSON.stringify(this.productForm.value)], { type: 'application/json' });
@@ -110,33 +111,57 @@ export class ProductFormComponent {
       if (this.selectedFile) {
         formData.append('image', this.selectedFile);
       }
-      this.pcService.createPC(formData).subscribe((data: any) => {
-        this.navigation.navigateToProduct(data.id);
-      });
+      if (this.isNewProduct) {
+        this.pcService.createPC(formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        });
+      } else {
+        this.pcService.editPC(id, formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        })
+      }
     } else if (productType === "PC_PART") {
       formData.append('pcPartDto', dto);
       if (this.selectedFile) {
         formData.append('image', this.selectedFile);
       }
-      this.pcPartService.createPCPart(formData).subscribe((data: any) => {
-        this.navigation.navigateToProduct(data.id);
-      });
+      if (this.isNewProduct) {
+        this.pcPartService.createPCPart(formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        });
+      } else {
+        this.pcPartService.editPCPart(id, formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        })
+      }
     } else if (productType === "PERIPHERAL") {
       formData.append('peripheralDto', dto);
       if (this.selectedFile) {
         formData.append('image', this.selectedFile);
       }
-      this.peripheralService.createPeripheral(formData).subscribe((data: any) => {
-        this.navigation.navigateToProduct(data.id);
-      });
+      if (this.isNewProduct) {
+        this.peripheralService.createPeripheral(formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        });
+      } else {
+        this.peripheralService.editPeripheral(id, formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        })
+      }
     } else if (productType === "SOFTWARE") {
       formData.append('softwareDto', dto);
       if (this.selectedFile) {
         formData.append('image', this.selectedFile);
       }
-      this.softwareService.createSoftware(formData).subscribe((data: any) => {
-        this.navigation.navigateToProduct(data.id);
-      });
+      if (this.isNewProduct) {
+        this.softwareService.createSoftware(formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        });
+      } else {
+        this.softwareService.editSoftware(id, formData).subscribe((data: any) => {
+          this.navigation.navigateToProduct(data.id);
+        })
+      }
     }
   }
 

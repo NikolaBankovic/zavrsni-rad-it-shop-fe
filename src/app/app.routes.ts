@@ -8,6 +8,9 @@ import {notLoggedInGuard} from "./guard/not-logged-in.guard";
 import {CartComponent} from "./component/cart/cart.component";
 import {ProductComponent} from "./component/product/product.component";
 import {ProductListComponent} from "./component/product-list/product-list.component";
+import {OrderHistoryComponent} from "./component/order-history/order-history.component";
+import {loggedInGuard} from "./guard/logged-in.guard";
+import {OrderDetailsComponent} from "./component/order-details/order-details.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,5 +21,8 @@ export const routes: Routes = [
   { path: 'edit-product/:id', component: ProductFormComponent, canActivate: [adminGuard]  },
   { path: 'product/:id', component: ProductComponent },
   { path: 'product' , component: ProductListComponent},
-  { path: 'cart', component: CartComponent }
+  { path: 'cart', component: CartComponent, canActivate: [loggedInGuard] },
+  { path: 'order', component: OrderHistoryComponent, canActivate: [loggedInGuard] },
+  { path: 'order/:id', component: OrderDetailsComponent, canActivate: [loggedInGuard] },
+  { path: '**', redirectTo: '/home' }
 ];

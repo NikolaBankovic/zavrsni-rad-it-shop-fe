@@ -1,0 +1,40 @@
+<div *ngIf="order" class="order-details">
+  <h2>Order Details</h2>
+
+  <div class="user-details">
+    <h3>User Information</h3>
+    <p><strong>Name:</strong> {{ order.user.firstName }} {{order.user.lastName}}</p>
+    <p><strong>Email:</strong> {{ order.user.email }}</p>
+    <p><strong>Email:</strong> {{ order.user.address }}</p>
+  </div>
+
+  <div class="order-items">
+    <h3>Order Items</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Product Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of order.orderItemsList">
+        <td>{{ item.product.id }}</td>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.productType }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price * item.quantity }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total-price">
+    <h3>Total Price: {{ order.totalPrice }}</h3>
+  </div>
+</div>

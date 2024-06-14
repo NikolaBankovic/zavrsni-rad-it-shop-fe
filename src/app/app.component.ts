@@ -23,10 +23,12 @@ export class AppComponent implements OnInit {
   private readonly cartService = inject(CartService);
 
   ngOnInit(): void {
-    this.loadCart();
-    this.cartService.getCartItemCount().subscribe(count => {
-      this.cartItemCount = count;
-    });
+    if (this.authService.isLoggedIn()) {
+      this.loadCart();
+      this.cartService.getCartItemCount().subscribe(count => {
+        this.cartItemCount = count;
+      });
+    }
   }
 
   loadCart(): void {

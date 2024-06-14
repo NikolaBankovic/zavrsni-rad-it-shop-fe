@@ -48,7 +48,14 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.user !== undefined;
+    if (this.user !== undefined) {
+      return true;
+    }
+    if (this.tokenExists()) {
+      return this.getUserByToken().subscribe();
+    } else {
+      return false;
+    }
   }
 
   isAdmin() {
