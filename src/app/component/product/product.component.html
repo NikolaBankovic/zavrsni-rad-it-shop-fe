@@ -9,10 +9,10 @@
     <mat-card-content>
       <p [innerHTML]="product.description | newlineToBreak"></p>
       <p><strong>Price:</strong> €{{ product.price }}</p>
-      <p *ngIf="product.pcType"><strong>PC Type:</strong> {{ product.pcType }}</p>
-      <p *ngIf="product.pcPartType"><strong>PC Part Type:</strong> {{ product.pcPartType }}</p>
-      <p *ngIf="product.peripheralType"><strong>Peripheral Type:</strong> {{ product.peripheralType }}</p>
-      <p *ngIf="product.softwareType"><strong>Software Type:</strong> {{ product.softwareType }}</p>
+      <p *ngIf="product.pcType"><strong>PC Type:</strong> {{ product.pcType.typeName }}</p>
+      <p *ngIf="product.pcPartType"><strong>PC Part Type:</strong> {{ product.pcPartType.typeName }}</p>
+      <p *ngIf="product.peripheralType"><strong>Peripheral Type:</strong> {{ product.peripheralType.typeName }}</p>
+      <p *ngIf="product.softwareType"><strong>Software Type:</strong> {{ product.softwareType.typeName }}</p>
       <p *ngIf="product.usedState"><strong>Used State:</strong> {{ product.usedState }}</p>
       <p *ngIf="product.warrantyLength"><strong>Warranty Length:</strong> {{ product.warrantyLength }} months</p>
       <p *ngIf="product.manufacturerCatalogueNumber"><strong>Catalogue Number:</strong> {{ product.manufacturerCatalogueNumber }}</p>

@@ -26,10 +26,10 @@
               <h2 [routerLink]="['/product', product.id]">{{ product.name }}</h2>
               <p>{{ product.description | truncate:200 }}</p>
               <p>Price: €{{ product.price }}</p>
-              <p *ngIf="product.pcType">Type: {{ product.pcType }}</p>
-              <p *ngIf="product.pcPartType">Type: {{ product.pcPartType }}</p>
-              <p *ngIf="product.peripheralType">Type: {{ product.peripheralType }}</p>
-              <p *ngIf="product.softwareType">Type: {{ product.softwareType }}</p>
+              <p *ngIf="product.pcType">Type: {{ product.pcType.typeName }}</p>
+              <p *ngIf="product.pcPartType">Type: {{ product.pcPartType.typeName }}</p>
+              <p *ngIf="product.peripheralType">Type: {{ product.peripheralType.typeName }}</p>
+              <p *ngIf="product.softwareType">Type: {{ product.softwareType.typeName }}</p>
               <p *ngIf="product.usedState">State: {{ product.usedState }}</p>
             </div>
             <div class="button-container">
