@@ -12,6 +12,7 @@
         <span *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
       </a>
       <a *ngIf="authService.isAdmin()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
+      <a *ngIf="authService.isAdmin()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product-type'"> Create Product Type </a>
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/order'"> Orders </a>
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" (click)="logout()"> Logout </a>
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/home'"> {{authService.getCurrentUser()?.username}} </a>

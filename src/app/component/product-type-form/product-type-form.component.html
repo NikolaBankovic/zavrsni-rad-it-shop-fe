@@ -1,0 +1,28 @@
+<div class="form-container">
+  <div>
+    <div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="productTypeForm">
+        <h1>Create product type</h1>
+        <mat-form-field appearance="outline">
+          <mat-label>Product type</mat-label>
+          <mat-select formControlName="productType" [compareWith]="compare">
+            <mat-option [value]="productType" *ngFor="let productType of productTypes"> {{ productType }}</mat-option>
+          </mat-select>
+          <mat-hint>Select product type:</mat-hint>
+          <mat-error>Product type is required!</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="typeName">
+          <mat-hint>Enter product type name:</mat-hint>
+          <mat-error>Product type name is required!</mat-error>
+        </mat-form-field>
+        <br>
+        <div class="submit-button-container">
+          <button mat-raised-button type="submit" [disabled]="!productTypeForm.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

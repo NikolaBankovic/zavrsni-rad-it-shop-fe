@@ -11,6 +11,7 @@ import {ProductListComponent} from "./component/product-list/product-list.compon
 import {OrderHistoryComponent} from "./component/order-history/order-history.component";
 import {loggedInGuard} from "./guard/logged-in.guard";
 import {OrderDetailsComponent} from "./component/order-details/order-details.component";
+import {ProductTypeFormComponent} from "./component/product-type-form/product-type-form.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,5 +25,6 @@ export const routes: Routes = [
   { path: 'cart', component: CartComponent, canActivate: [loggedInGuard] },
   { path: 'order', component: OrderHistoryComponent, canActivate: [loggedInGuard] },
   { path: 'order/:id', component: OrderDetailsComponent, canActivate: [loggedInGuard] },
+  { path: 'create-product-type', component: ProductTypeFormComponent, canActivate: [adminGuard] },
   { path: '**', redirectTo: '/home' }
 ];

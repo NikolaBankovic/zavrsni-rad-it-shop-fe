@@ -41,4 +41,20 @@ export class CodebookService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + '/category');
   }
+
+  createPCType(data: any) {
+    return this.http.post(this.url + '/pc-type', data);
+  }
+
+  createPCPartType(data: any) {
+    return this.http.post(this.url + '/pc-part-type', data);
+  }
+
+  createPeripheralType(data: any) {
+    return this.http.post(this.url + '/peripheral-type', data);
+  }
+
+  createSoftwareType(data: any) {
+    return this.http.post(this.url + '/software-type', data);
+  }
 }
