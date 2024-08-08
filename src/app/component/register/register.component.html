@@ -2,54 +2,64 @@
   <div>
     <div>
       <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
-        <h1>Register</h1>
+        <h1 *ngIf="isNewUser">Register</h1>
+        <h1 *ngIf="!isNewUser&& this.router.url.startsWith('/edit')">Edit user</h1>
+        <h1 *ngIf="!isNewUser && this.router.url.startsWith('/create')">Create user</h1>
         <mat-form-field appearance="outline">
           <mat-label>First name</mat-label>
           <input matInput formControlName="firstName">
-          <mat-hint>Enter your first name:</mat-hint>
+          <mat-hint>Enter your first name</mat-hint>
           <mat-error>First name is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Last name</mat-label>
           <input matInput formControlName="lastName">
-          <mat-hint>Enter your last name:</mat-hint>
+          <mat-hint>Enter your last name</mat-hint>
           <mat-error>Last name is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username">
-          <mat-hint>Enter your username:</mat-hint>
+          <mat-hint>Enter your username</mat-hint>
           <mat-error>Username is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email">
-          <mat-hint>Enter your e-mail:</mat-hint>
+          <mat-hint>Enter your e-mail</mat-hint>
           <mat-error>Email must be in correct format!</mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field appearance="outline">
+        <mat-form-field *ngIf="!this.router.url.startsWith('/edit')" appearance="outline">
           <mat-label>Password</mat-label>
           <input type="password" matInput formControlName="password">
-          <mat-hint>Enter your password:</mat-hint>
+          <mat-hint>Enter your password</mat-hint>
           <mat-error>Password is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Phone Number</mat-label>
           <input matInput formControlName="phoneNumber">
-          <mat-hint>Enter your phone number:</mat-hint>
+          <mat-hint>Enter your phone number</mat-hint>
           <mat-error>Phone number is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Address</mat-label>
           <input matInput formControlName="address">
-          <mat-hint>Enter your address:</mat-hint>
+          <mat-hint>Enter your address</mat-hint>
           <mat-error>Address is required!</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="!isNewUser" appearance="outline">
+          <mat-label>User role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option [value]="role" *ngFor="let role of Object.keys(Role)"> {{ role }}</mat-option>
+          </mat-select>
+          <mat-hint>Select role</mat-hint>
         </mat-form-field>
         <br>
         <button mat-raised-button type="submit" [disabled]="!registerForm.valid">Submit</button>

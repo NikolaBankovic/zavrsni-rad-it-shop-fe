@@ -1,0 +1,10 @@
+.create-user-button-box {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
+}

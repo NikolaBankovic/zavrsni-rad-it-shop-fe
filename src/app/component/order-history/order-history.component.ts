@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {OrderService} from "../../service/order.service";
-import {NgForOf} from "@angular/common";
+import {DecimalPipe, NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -8,7 +8,8 @@ import {RouterLink} from "@angular/router";
   standalone: true,
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
+    DecimalPipe
   ],
   templateUrl: './order-history.component.html',
   styleUrl: './order-history.component.css'

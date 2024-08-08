@@ -1,15 +1,18 @@
 import {Component, inject} from '@angular/core';
 import {OrderService} from "../../service/order.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Product} from "../../dto/product.dto";
-import {NgForOf, NgIf} from "@angular/common";
+import {DatePipe, DecimalPipe, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-order-details',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    RouterLink,
+    DecimalPipe,
+    DatePipe
   ],
   templateUrl: './order-details.component.html',
   styleUrl: './order-details.component.css'

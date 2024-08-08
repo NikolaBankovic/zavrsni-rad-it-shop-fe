@@ -19,7 +19,7 @@ export class OrderService {
     return this.http.get(this.url + `/${id}`);
   }
 
-  createOrder() {
-    return this.http.post(this.url, null);
+  createOrder(creditCardNumber: string) {
+    return this.http.post(this.url, creditCardNumber);
   }
 }

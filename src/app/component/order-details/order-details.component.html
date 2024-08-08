@@ -2,11 +2,22 @@
   <h2>Order Details</h2>
 
   <div class="user-details">
-    <h3>User Information</h3>
-    <p><strong>Name:</strong> {{ order.user.firstName }} {{order.user.lastName}}</p>
-    <p><strong>Email:</strong> {{ order.user.email }}</p>
-    <p><strong>Email:</strong> {{ order.user.address }}</p>
+    <div>
+      <p><strong>Name: </strong> {{ order.user.firstName }} {{ order.user.lastName }}</p>
+      <p><strong>Email: </strong> {{ order.user.email }}</p>
+      <p><strong>Phone number: </strong> {{ order.user.phoneNumber }}</p>
+      <p><strong>Address: </strong> {{ order.user.address }}</p>
+    </div>
   </div>
+  <div class="user-details">
+    <div class="details-left">
+      <p><strong>Payment method: </strong> {{ order.creditCardNumber }}</p>
+    </div>
+    <div class="details-right">
+      <p><strong>Order date: </strong> {{ order.orderDate | date:'dd.MM.yyyy HH:mm:ss' }}</p>
+    </div>
+  </div>
+
 
   <div class="order-items">
     <h3>Order Items</h3>
@@ -16,25 +27,25 @@
         <th>Product ID</th>
         <th>Product Name</th>
         <th>Product Type</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
+        <th style="text-align: center">Price for one</th>
+        <th style="text-align: center">Quantity</th>
+        <th style="text-align: center">Subtotal</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of order.orderItemsList">
-        <td>{{ item.product.id }}</td>
+      <tr *ngFor="let item of order.orderItemsList" [routerLink]="['/product', item.product.id]">
+        <td style="text-align: center">{{ item.product.id }}</td>
         <td>{{ item.product.name }}</td>
         <td>{{ item.product.productType }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.price * item.quantity }}</td>
+        <td style="text-align: center">€{{ item.price }}</td>
+        <td style="text-align: center">{{ item.quantity }}</td>
+        <td style="text-align: center">€{{ item.price * item.quantity }}</td>
       </tr>
       </tbody>
     </table>
   </div>
 
   <div class="total-price">
-    <h3>Total Price: {{ order.totalPrice }}</h3>
+    <h3>Total Price: €{{ order.totalPrice | number:'1.2-2'  }}</h3>
   </div>
 </div>

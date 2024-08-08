@@ -61,6 +61,9 @@ export class PcPartService {
       if(formData.manufacturerCatalogueNumber != null){
         params = params.append('manufacturerCatalogueNumber', formData.manufacturerCatalogueNumber);
       }
+      if (formData.sort != null) {
+        params = params.append('sort', formData.sort);
+      }
     }
     return params;
   }

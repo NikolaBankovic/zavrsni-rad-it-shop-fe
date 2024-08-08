@@ -1,0 +1,39 @@
+<h2 mat-dialog-title class="md-title">Enter payment details</h2>
+<mat-dialog-content style="padding-top: 10px">
+  <form [formGroup]="completeOrderForm">
+    <div class="flex-container">
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Name on the card</mat-label>
+        <input type="text" matInput formControlName="creditCardName">
+        <mat-hint>Enter name on credit card</mat-hint>
+        <mat-error>Name on credit card is required!</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="flex-container">
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Credit card number</mat-label>
+        <input type="text" matInput formControlName="creditCardNumber">
+        <mat-hint>Enter credit card number</mat-hint>
+        <mat-error>Credit card number is required!</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="flex-container">
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Expiration date</mat-label>
+        <input type="text" matInput formControlName="expirationDate">
+        <mat-hint>Enter expiration date in format MM/YYYY</mat-hint>
+        <mat-error>Expiration date is required!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>CVC</mat-label>
+        <input type="text" matInput formControlName="CVC">
+        <mat-hint>Enter CVC</mat-hint>
+        <mat-error>CVC is required!</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button (click)="confirm()">Complete Order</button>
+</mat-dialog-actions>

@@ -1,3 +1,5 @@
+import {SubCategory} from "./type.dto";
+
 export class Product {
   id!: number;
   productType!: string;
@@ -5,10 +7,10 @@ export class Product {
   price!: number;
   description!: string;
   image!: string | null;
-  pcType?: string;
-  pcPartType?: string;
-  peripheralType?: string;
-  softwareType?: string;
+  pcType?: SubCategory;
+  pcPartType?: SubCategory;
+  peripheralType?: SubCategory;
+  softwareType?: SubCategory;
   usedState?: string;
   warrantyLength?: number;
   manufacturerName?: string;

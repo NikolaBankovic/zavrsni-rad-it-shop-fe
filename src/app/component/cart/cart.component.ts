@@ -7,7 +7,7 @@ import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {OrderService} from "../../service/order.service";
 import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {ConfirmOrderComponent} from "../confirm-order/confirm-order.component";
 import {AppNavigation} from "../../app.navigation";
 
 @Component({
@@ -60,14 +60,15 @@ export class CartComponent {
   }
 
   protected createOrder() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {});
-    dialogRef.afterClosed().subscribe(confirmed => {
-      if (confirmed) {
-        this.orderService.createOrder().subscribe((data: any) => {
+    const dialogRef = this.dialog.open(ConfirmOrderComponent, {});
+    dialogRef.afterClosed().subscribe(completeOrder => {
+      if (completeOrder) {
+        const creditCardNumber = completeOrder.creditCardNumber.slice(-4);
+        this.orderService.createOrder(creditCardNumber).subscribe((data: any) => {
           this.navigation.navigateToOrderDetails(data.id);
         });
       }
-    })
+    });
   }
 
   incrementQuantity(item: CartItem) {

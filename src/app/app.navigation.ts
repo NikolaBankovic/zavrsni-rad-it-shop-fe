@@ -35,4 +35,8 @@ export class AppNavigation {
   public navigateToOrderDetails(id: number) {
     this.router.navigate(['/order', id]);
   }
+
+  public navigateToUserList() {
+    this.router.navigate(['/user-list']);
+  }
 }

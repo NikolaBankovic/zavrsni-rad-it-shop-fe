@@ -14,6 +14,7 @@ import {SoftwareService} from "../../service/software.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../service/product.service";
 import {AppNavigation} from "../../app.navigation";
+import {SubCategory} from "../../dto/type.dto";
 
 @Component({
   selector: 'app-product-form',
@@ -50,10 +51,10 @@ export class ProductFormComponent {
 
   protected isNewProduct: boolean = true;
   protected productTypes: string[] = [];
-  protected pcTypes: string[] = [];
-  protected pcPartTypes: string[] = [];
-  protected peripheralTypes: string[] = [];
-  protected softwareTypes: string[] = [];
+  protected pcTypes: SubCategory[] = [];
+  protected pcPartTypes: SubCategory[] = [];
+  protected peripheralTypes: SubCategory[] = [];
+  protected softwareTypes: SubCategory[] = [];
   protected usedStates: string[] = [];
   protected selectedFile: File | null = null;
 
