@@ -47,3 +47,25 @@ td {
 tbody tr:hover {
   background-color: #f9f9f9;
 }
+
+.user-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-left,
+.details-right {
+  flex: 1;
+}
+
+.details-left {
+  padding-right: 20px;
+}
+
+.details-right {
+  text-align: right;
+}
+
+.total-price {
+  text-align: right;
+}

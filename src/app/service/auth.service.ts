@@ -52,7 +52,7 @@ export class AuthService {
       return true;
     }
     if (this.tokenExists()) {
-      return this.getUserByToken().subscribe();
+      return this.getUserByToken().subscribe(user => this.user = user);
     } else {
       return false;
     }
@@ -65,6 +65,13 @@ export class AuthService {
     return false;
   }
 
+  isSupplier() {
+    if (this.user !== undefined) {
+      return this.user.role === Role.ROLE_SUPPLIER;
+    }
+    return false;
+  }
+
   tokenExists() {
     const token = localStorage.getItem('access_token');
     return !!token;
@@ -72,5 +79,13 @@ export class AuthService {
 
   getCurrentUser() {
     return this.user;
+  }
+
+  getCurrentUserId() {
+    return this.user!.id;
+  }
+
+  clearCurrentUser() {
+    this.user = undefined;
   }
 }

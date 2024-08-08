@@ -4,16 +4,16 @@
     <thead>
     <tr>
       <th>Order ID</th>
-      <th>User</th>
+      <th style="text-align: left">User</th>
       <th>Total Price</th>
       <th>Details</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let order of orders">
-      <td>{{ order.id }}</td>
+      <td style="text-align: center">{{ order.id }}</td>
       <td>{{ order.user.firstName }} {{order.user.lastName}}</td>
-      <td>{{ order.totalPrice }}</td>
+      <td style="text-align: center">{{ order.totalPrice | number: '1.2-2' }}</td>
       <td>
         <a [routerLink]="['/order', order.id]">View Details</a>
       </td>

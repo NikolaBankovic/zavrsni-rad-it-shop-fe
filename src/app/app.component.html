@@ -8,14 +8,27 @@
     </div>
     <div class="right-buttons">
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/cart'">
-        <mat-icon>shopping_cart</mat-icon>
-        <span *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+        <div class="icon-text">
+          <mat-icon>shopping_cart</mat-icon>
+          <span *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+        </div>
       </a>
-      <a *ngIf="authService.isAdmin()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
-      <a *ngIf="authService.isAdmin()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product-type'"> Create Product Type </a>
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/order'"> Orders </a>
+      <div *ngIf="authService.isAdmin()" class="category-item">
+        <a mat-button routerLinkActive="mat-btn-active" class="category-name">Create options</a>
+        <div class="sub-category-box">
+          <div class="sub-category-item">
+            <a mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
+          </div>
+          <div class="sub-category-item">
+            <a mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product-type'"> Create Product Type </a>
+          </div>
+        </div>
+      </div>
+      <a *ngIf="authService.isSupplier()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/create-product'"> Create Product </a>
+      <a *ngIf="authService.isAdmin()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/user-list'"> View Users </a>
+      <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/profile'"> {{authService.getCurrentUser()?.username}} </a>
       <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" (click)="logout()"> Logout </a>
-      <a *ngIf="authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/home'"> {{authService.getCurrentUser()?.username}} </a>
       <a *ngIf="!authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/login'"> Login </a>
       <a *ngIf="!authService.isLoggedIn()" mat-button routerLinkActive="mat-btn-active" [routerLink]="'/register'"> Register </a>
     </div>

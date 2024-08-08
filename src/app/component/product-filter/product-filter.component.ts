@@ -8,6 +8,8 @@ import {MatLine, MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatInput} from "@angular/material/input";
+import {Role} from "../../enum/role";
+import {SortOptions} from "../../enum/sortOptions";
 
 @Component({
   selector: 'app-product-filter',
@@ -47,7 +49,8 @@ export class ProductFilterComponent implements OnInit {
     'usedState': new FormControl(),
     'warrantyLength': new FormControl(),
     'manufacturerName': new FormControl(),
-    'manufacturerCatalogueNumber': new FormControl()
+    'manufacturerCatalogueNumber': new FormControl(),
+    'sort': new FormControl()
   });
 
   constructor() {
@@ -66,4 +69,8 @@ export class ProductFilterComponent implements OnInit {
     const formData = this.productForm.value;
     this.filterApplied.emit(formData);
   }
+
+  protected readonly Role = Role;
+  protected readonly Object = Object;
+  protected readonly SortOptions = SortOptions;
 }

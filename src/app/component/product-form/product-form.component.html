@@ -9,28 +9,28 @@
           <mat-select formControlName="productType" [compareWith]="compare">
             <mat-option [value]="productType" *ngFor="let productType of productTypes"> {{ productType }}</mat-option>
           </mat-select>
-          <mat-hint>Select product type:</mat-hint>
+          <mat-hint>Select product type</mat-hint>
           <mat-error>Product type is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name">
-          <mat-hint>Enter product name:</mat-hint>
+          <mat-hint>Enter product name</mat-hint>
           <mat-error>Product name is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Price</mat-label>
           <input type="number" matInput formControlName="price">
-          <mat-hint>Enter product price:</mat-hint>
+          <mat-hint>Enter product price</mat-hint>
           <mat-error>Product price is required!</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Description</mat-label>
           <textarea rows="5" mat-line matInput formControlName="description"></textarea>
-          <mat-hint>Enter product description:</mat-hint>
+          <mat-hint>Enter product description</mat-hint>
           <mat-error>Product description is required!</mat-error>
         </mat-form-field>
         <br>
@@ -40,7 +40,7 @@
             <mat-select formControlName="peripheralType" [compareWith]="compare">
               <mat-option [value]="peripheralType" *ngFor="let peripheralType of peripheralTypes"> {{ peripheralType.typeName }}</mat-option>
             </mat-select>
-            <mat-hint>Select peripheral type:</mat-hint>
+            <mat-hint>Select peripheral type</mat-hint>
             <mat-error>Peripheral type is required!</mat-error>
           </mat-form-field>
           <br>
@@ -51,7 +51,7 @@
             <mat-select formControlName="softwareType" [compareWith]="compare">
               <mat-option [value]="softwareType" *ngFor="let softwareType of softwareTypes"> {{ softwareType.typeName }}</mat-option>
             </mat-select>
-            <mat-hint>Select software type:</mat-hint>
+            <mat-hint>Select software type</mat-hint>
             <mat-error>Software type is required!</mat-error>
           </mat-form-field>
           <br>
@@ -62,7 +62,7 @@
             <mat-select formControlName="pcType" [compareWith]="compare">
               <mat-option [value]="pcType" *ngFor="let pcType of pcTypes"> {{ pcType.typeName }}</mat-option>
             </mat-select>
-            <mat-hint>Select PC type:</mat-hint>
+            <mat-hint>Select PC type</mat-hint>
             <mat-error>PC type is required!</mat-error>
           </mat-form-field>
           <br>
@@ -73,7 +73,7 @@
             <mat-select formControlName="pcPartType" [compareWith]="compare">
               <mat-option [value]="pcPartType" *ngFor="let pcPartType of pcPartTypes"> {{ pcPartType.typeName }}</mat-option>
             </mat-select>
-            <mat-hint>Select PC part type:</mat-hint>
+            <mat-hint>Select PC part type</mat-hint>
             <mat-error>PC part type is required!</mat-error>
           </mat-form-field>
           <br>
@@ -82,35 +82,35 @@
             <mat-select formControlName="usedState" [compareWith]="compare">
               <mat-option [value]="usedState" *ngFor="let usedState of usedStates"> {{ usedState }}</mat-option>
             </mat-select>
-            <mat-hint>Select used state:</mat-hint>
+            <mat-hint>Select used state</mat-hint>
             <mat-error>Used state is required!</mat-error>
           </mat-form-field>
           <br>
           <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
             <mat-label>Warranty length</mat-label>
             <input type="number" matInput formControlName="warrantyLength">
-            <mat-hint>Enter warranty length:</mat-hint>
+            <mat-hint>Enter warranty length</mat-hint>
             <mat-error>Warranty length is required!</mat-error>
           </mat-form-field>
           <br>
           <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
             <mat-label>Manufacturer name</mat-label>
             <input matInput formControlName="manufacturerName">
-            <mat-hint>Enter manufacturer name:</mat-hint>
+            <mat-hint>Enter manufacturer name</mat-hint>
             <mat-error>Manufacturer name is required!</mat-error>
           </mat-form-field>
           <br>
           <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
             <mat-label>Manufacturer catalogue number</mat-label>
             <input matInput formControlName="manufacturerCatalogueNumber">
-            <mat-hint>Enter manufacturer catalogue number:</mat-hint>
+            <mat-hint>Enter manufacturer catalogue number</mat-hint>
             <mat-error>Manufacturer catalogue number is required!</mat-error>
           </mat-form-field>
           <br>
           <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
             <mat-label>partLink</mat-label>
             <input matInput formControlName="linkToPartOnManufacturerWebsite">
-            <mat-hint>Enter part link:</mat-hint>
+            <mat-hint>Enter part link</mat-hint>
             <mat-error>Part link is required!</mat-error>
           </mat-form-field>
           <br>
