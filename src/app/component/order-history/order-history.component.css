@@ -1,0 +1,36 @@
+.order-history {
+  padding: 10px;
+}
+
+.order-row {
+  padding: 10px;
+}
+
+.center-text {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.order-user {
+  font-weight: bold;
+}
+
+.order-actions {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.details-link {
+  text-decoration: none;
+  color: #673ab7;
+  font-weight: bold;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+th {
+  padding: 0 20px;
+}

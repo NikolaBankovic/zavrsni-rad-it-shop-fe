@@ -3,21 +3,21 @@
   <table>
     <thead>
     <tr>
-      <th>Order ID</th>
+      <th>Order number</th>
       <th style="text-align: left">User</th>
       <th>Total Price</th>
       <th>Details</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let order of orders">
-      <td style="text-align: center">{{ order.id }}</td>
-      <td>{{ order.user.firstName }} {{order.user.lastName}}</td>
-      <td style="text-align: center">{{ order.totalPrice | number: '1.2-2' }}</td>
-      <td>
-        <a [routerLink]="['/order', order.id]">View Details</a>
-      </td>
-    </tr>
+      <tr *ngFor="let order of orders" class="order-row">
+        <td class="center-text">{{ order.id }}</td>
+        <td class="order-user">{{ order.user.firstName }} {{order.user.lastName}}</td>
+        <td class="center-text">€{{ order.totalPrice | number: '1.2-2' }}</td>
+        <td class="order-actions">
+          <a [routerLink]="['/order', order.id]" class="details-link">View Details</a>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

@@ -3,14 +3,17 @@ html, body {
   margin: 0;
 }
 
+.user-container {
+  text-align: center;
+  margin: 20px 25% 0 25%;
+}
+
 .user-details {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   text-align: left;
   top: auto;
-  padding-top: 20px;
 }
 
 .user-details p {
@@ -19,4 +22,12 @@ html, body {
 
 .user-details button {
   margin-top: 20px;
+}
+
+hr {
+  height: 2px;
+  background-color: #673ab7;
+  margin: 10px 0;
+  border: 0;
+  width: 20%;
 }

@@ -95,3 +95,13 @@
   margin: 0 4px;
   line-height: 1.5;
 }
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.total-cost {
+  padding-bottom: 10px;
+}

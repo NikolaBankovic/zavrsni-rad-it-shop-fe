@@ -69,3 +69,7 @@ tbody tr:hover {
 .total-price {
   text-align: right;
 }
+
+.center-text {
+  text-align: center;
+}

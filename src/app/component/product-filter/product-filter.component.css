@@ -17,3 +17,7 @@
 .form-items {
   margin-top: 20px;
 }
+
+mat-form-field {
+  padding: 5px;
+}

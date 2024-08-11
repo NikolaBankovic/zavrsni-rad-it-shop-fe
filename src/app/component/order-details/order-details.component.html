@@ -27,19 +27,19 @@
         <th>Product ID</th>
         <th>Product Name</th>
         <th>Product Type</th>
-        <th style="text-align: center">Price for one</th>
-        <th style="text-align: center">Quantity</th>
-        <th style="text-align: center">Subtotal</th>
+        <th class="center-text">Price for one</th>
+        <th class="center-text">Quantity</th>
+        <th class="center-text">Subtotal</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let item of order.orderItemsList" [routerLink]="['/product', item.product.id]">
-        <td style="text-align: center">{{ item.product.id }}</td>
+        <td style="text-align: left">{{ item.product.id }}</td>
         <td>{{ item.product.name }}</td>
         <td>{{ item.product.productType }}</td>
-        <td style="text-align: center">€{{ item.price }}</td>
-        <td style="text-align: center">{{ item.quantity }}</td>
-        <td style="text-align: center">€{{ item.price * item.quantity }}</td>
+        <td class="center-text">€{{ item.price }}</td>
+        <td class="center-text">{{ item.quantity }}</td>
+        <td class="center-text">€{{ item.price * item.quantity }}</td>
       </tr>
       </tbody>
     </table>

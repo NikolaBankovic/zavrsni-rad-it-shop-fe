@@ -1,9 +1,14 @@
-<div class="user-details">
-  <p><strong>First Name:</strong> {{ user.firstName }}</p>
-  <p><strong>Last Name:</strong> {{ user.lastName }}</p>
-  <p><strong>Username:</strong> {{ user.username }}</p>
-  <p><strong>Email:</strong> {{ user.email }}</p>
-  <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
-  <p><strong>Address:</strong> {{ user.address }}</p>
-  <button mat-raised-button color="primary" (click)="changePassword()">Change password</button>
+<div class="user-container">
+  <h1>User profile</h1>
+  <div class="user-details">
+    <hr>
+    <p><strong>First Name:</strong> {{ user.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ user.lastName }}</p>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+    <button mat-raised-button color="primary" (click)="changePassword()">Change password</button>
+  </div>
 </div>
+
