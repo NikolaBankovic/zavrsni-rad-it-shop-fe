@@ -1,16 +1,16 @@
 <div class="form-container">
   <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
     <h1 *ngIf="isNewUser">Register</h1>
-    <h1 *ngIf="!isNewUser&& this.router.url.startsWith('/edit')">Edit user</h1>
+    <h1 *ngIf="!isNewUser && this.router.url.startsWith('/edit')">Edit user</h1>
     <h1 *ngIf="!isNewUser && this.router.url.startsWith('/create')">Create user</h1>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="!this.router.url.startsWith('/edit')">
       <mat-label>First name</mat-label>
       <input matInput formControlName="firstName">
       <mat-hint>Enter your first name</mat-hint>
       <mat-error>First name is required!</mat-error>
     </mat-form-field>
     <br>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="!this.router.url.startsWith('/edit')">
       <mat-label>Last name</mat-label>
       <input matInput formControlName="lastName">
       <mat-hint>Enter your last name</mat-hint>

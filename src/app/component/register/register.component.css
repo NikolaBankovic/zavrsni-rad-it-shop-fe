@@ -15,8 +15,14 @@
   margin-top: 1rem;
 }
 
+form {
+  width: 50%;
+}
+
 mat-form-field {
   padding: 5px;
+  justify-content: center;
+  width: 100%;
 }
 
 h1 {

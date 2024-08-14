@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Product} from "../../dto/product.dto";
-import {NgForOf, NgIf} from "@angular/common";
+import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
 import {CartService} from "../../service/cart.service";
 import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
@@ -22,7 +22,8 @@ import {AppNavigation} from "../../app.navigation";
     MatButton,
     RouterLink,
     TruncatePipe,
-    MatProgressSpinner
+    MatProgressSpinner,
+    DecimalPipe
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

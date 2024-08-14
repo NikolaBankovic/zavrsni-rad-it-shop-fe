@@ -50,7 +50,7 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   flex-grow: 1;
   align-content: start;
@@ -112,3 +112,4 @@
   margin-top: auto;
   background: #fff;
 }
+

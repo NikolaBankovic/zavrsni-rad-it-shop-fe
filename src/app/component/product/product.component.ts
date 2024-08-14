@@ -12,10 +12,12 @@ import {
   MatCardSubtitle,
   MatCardTitle
 } from "@angular/material/card";
-import {NgIf} from "@angular/common";
+import {DecimalPipe, NgIf} from "@angular/common";
 import {AuthService} from "../../service/auth.service";
 import {NewlineToBreakPipe} from "../../pipe/newline-to-break.pipe";
 import {AppNavigation} from "../../app.navigation";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-product',
@@ -30,7 +32,8 @@ import {AppNavigation} from "../../app.navigation";
     MatCardHeader,
     MatCard,
     NgIf,
-    NewlineToBreakPipe
+    NewlineToBreakPipe,
+    DecimalPipe
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
@@ -40,6 +43,8 @@ export class ProductComponent {
   private readonly navigation = inject(AppNavigation);
   private readonly productService = inject(ProductService);
   private readonly cartService = inject(CartService);
+  private readonly dialog = inject(MatDialog);
+
 
   protected readonly authService = inject(AuthService);
   protected product = new Product();
@@ -70,6 +75,16 @@ export class ProductComponent {
     } else {
       this.navigation.navigateToLogin();
     }
+  }
+
+  protected deleteProduct(id: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {});
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.productService.deleteProduct(id).subscribe(() =>this.navigation.navigateToHome());
+      }
+    });
+
   }
 
 }

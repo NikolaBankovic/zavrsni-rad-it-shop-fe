@@ -37,9 +37,9 @@
         <td style="text-align: left">{{ item.product.id }}</td>
         <td>{{ item.product.name }}</td>
         <td>{{ item.product.productType }}</td>
-        <td class="center-text">€{{ item.price }}</td>
+        <td class="center-text">€{{ item.price  | number: '1.2-2' }}</td>
         <td class="center-text">{{ item.quantity }}</td>
-        <td class="center-text">€{{ item.price * item.quantity }}</td>
+        <td class="center-text">€{{ item.price * item.quantity  | number: '1.2-2' }}</td>
       </tr>
       </tbody>
     </table>

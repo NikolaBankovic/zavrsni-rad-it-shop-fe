@@ -42,7 +42,7 @@ export class ConfirmOrderComponent {
     'creditCardName': new FormControl(null, Validators.required),
     'creditCardNumber': new FormControl(null, [Validators.required, Validators.pattern("[0-9]{16}")]),
     'expirationDate': new FormControl(null, [Validators.required, Validators.pattern("[0-9]{2}/[0-9]{4}")]),
-    'CVC': new FormControl(null, Validators.required)
+    'CVC': new FormControl(null, [Validators.required, Validators.pattern("[0-9]{3}")])
   });
   protected confirm() {
     this.dialogRef.close(this.completeOrderForm.value);

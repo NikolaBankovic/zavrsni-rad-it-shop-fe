@@ -6,9 +6,10 @@
       <mat-card-subtitle>{{ product.manufacturerName }}</mat-card-subtitle>
     </mat-card-header>
     <img *ngIf="product.image" [src]="getImageSrc(product.image)" alt="{{ product.name }}"/>
+    <hr style="width: 99%; background-color: #673ab7; height: 3px">
     <mat-card-content>
       <p [innerHTML]="product.description | newlineToBreak"></p>
-      <p><strong>Price:</strong> €{{ product.price }}</p>
+      <p><strong>Price:</strong> €{{ product.price | number: '1.2-2' }}</p>
       <p *ngIf="product.pcType"><strong>PC Type:</strong> {{ product.pcType.typeName }}</p>
       <p *ngIf="product.pcPartType"><strong>PC Part Type:</strong> {{ product.pcPartType.typeName }}</p>
       <p *ngIf="product.peripheralType"><strong>Peripheral Type:</strong> {{ product.peripheralType.typeName }}</p>
@@ -21,10 +22,11 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <br>
+      <br *ngIf="!authService.isAdmin()">
+      <button *ngIf="authService.isAdmin()" mat-raised-button color="primary" style="background-color: red" (click)="deleteProduct(product.id)">DELETE</button>
       <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
       <button *ngIf="authService.isAdmin()" [routerLink]="['/edit-product', product.id]" mat-raised-button color="primary">EDIT</button>
-      <br *ngIf="!authService.isAdmin() && !authService.isSupplier()">
+      <br *ngIf="!authService.isAdmin()">
     </mat-card-actions>
   </mat-card>
 </div>

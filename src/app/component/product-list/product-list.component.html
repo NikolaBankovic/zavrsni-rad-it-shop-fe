@@ -20,7 +20,7 @@
             <div class="product-info">
               <h2 [routerLink]="['/product', product.id]">{{ product.name | truncate:50 }}</h2>
               <p>{{ product.description | truncate:200 }}</p>
-              <p>Price: €{{ product.price }}</p>
+              <p>Price: €{{ product.price  | number: '1.2-2' }}</p>
               <p *ngIf="product.pcType">Type: {{ product.pcType.typeName }}</p>
               <p *ngIf="product.pcPartType">Type: {{ product.pcPartType.typeName }}</p>
               <p *ngIf="product.peripheralType">Type: {{ product.peripheralType.typeName }}</p>
