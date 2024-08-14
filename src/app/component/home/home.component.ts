@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Product} from "../../dto/product.dto";
-import {NgForOf, NgIf} from "@angular/common";
+import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
 import {CartService} from "../../service/cart.service";
 import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
@@ -22,7 +22,8 @@ import {AppNavigation} from "../../app.navigation";
     MatButton,
     RouterLink,
     TruncatePipe,
-    MatProgressSpinner
+    MatProgressSpinner,
+    DecimalPipe
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -59,24 +60,23 @@ export class HomeComponent {
       this.pcParts = data as Product[];
       this.isLoading = false;
     }, error => {
-      console.error('Error loading PC', error);
+      console.error('Error loading PC parts', error);
       this.isLoading = false;
     })
     this.peripheralService.getTopPeripherals().subscribe(data => {
       this.peripherals = data as Product[];
       this.isLoading = false;
     }, error => {
-      console.error('Error loading PC', error);
+      console.error('Error loading Peripherals', error);
       this.isLoading = false;
     })
     this.softwareService.getTopSoftware().subscribe(data => {
       this.software = data as Product[];
       this.isLoading = false;
     }, error => {
-      console.error('Error loading PC', error);
+      console.error('Error loading Software', error);
       this.isLoading = false;
     })
-
   }
 
   protected getImageSrc(base64String: string): string {

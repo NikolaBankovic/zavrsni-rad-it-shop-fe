@@ -7,9 +7,9 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
-  margin: 10%;
+  margin: 0 10% 0 10%;
 }
 
 .product-card {
@@ -56,4 +56,12 @@
 
 .button-container {
   margin-top: 20%;
+}
+
+.products-grid-title {
+  margin: 5% 5% 10px 5%;
+  padding: 10px 0 10px 0;
+  background-color: #673ab7;
+  text-align: center;
+  color: white;
 }

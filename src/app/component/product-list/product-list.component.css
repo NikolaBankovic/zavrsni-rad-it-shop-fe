@@ -1,12 +1,36 @@
 .sidenav-container {
   height: 100vh;
   display: flex;
+  position: relative;
 }
 
 .mat-sidenav-content {
+  transition: margin-left 0.3s ease;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.mat-sidenav {
+  width: 250px;
+}
+
+.mat-sidenav.mat-drawer-opened + .mat-sidenav-content {
+  margin-left: 250px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: #fff;
+}
+
+.toggle-button {
+  min-width: auto;
+  padding: 4px 8px;
+  font-size: 12px;
 }
 
 .content-container {
@@ -14,6 +38,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 10%;
 }
 
 .loading-container {
@@ -25,10 +50,9 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   flex-grow: 1;
-  margin: 10%;
   align-content: start;
 }
 
@@ -84,8 +108,8 @@
   margin-bottom: auto;
 }
 
-.toggle-button {
-  min-width: 100px;
-  padding: 4px 8px;
-  font-size: 12px;
+.paginator {
+  margin-top: auto;
+  background: #fff;
 }
+

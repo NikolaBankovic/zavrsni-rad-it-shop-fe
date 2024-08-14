@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {Product} from "../../dto/product.dto";
 import {ProductService} from "../../service/product.service";
@@ -31,7 +31,8 @@ import {MatPaginator} from "@angular/material/paginator";
     ProductFilterComponent,
     MatSidenav,
     MatSidenavContainer,
-    MatPaginator
+    MatPaginator,
+    DecimalPipe
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'

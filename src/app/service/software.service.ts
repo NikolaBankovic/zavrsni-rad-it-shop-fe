@@ -49,6 +49,9 @@ export class SoftwareService {
       if(formData.priceTo != null){
         params = params.append('priceTo', formData.priceTo);
       }
+      if (formData.sort != null) {
+        params = params.append('sort', formData.sort);
+      }
     }
     return params;
   }

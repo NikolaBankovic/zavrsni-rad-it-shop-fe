@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment.dev";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class ProductService {
 
   incrementProductTimesVisited(id: number) {
     return this.http.patch(this.url + `/${id}`, null);
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete<any>(this.url + `/${id}`);
   }
 }

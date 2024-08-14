@@ -1,23 +1,23 @@
 <div class="form-container">
   <div>
     <div>
-      <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
+      <form (ngSubmit)="onSubmit()" [formGroup]="productForm" class="form-items">
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name">
-          <mat-hint>Enter product name:</mat-hint>
+          <mat-hint>Enter product name</mat-hint>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Price</mat-label>
           <input type="number" matInput formControlName="priceFrom">
-          <mat-hint>Enter minimum product price:</mat-hint>
+          <mat-hint>Enter minimum product price</mat-hint>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Price</mat-label>
           <input type="number" matInput formControlName="priceTo">
-          <mat-hint>Enter maximum product price:</mat-hint>
+          <mat-hint>Enter maximum product price</mat-hint>
         </mat-form-field>
         <br>
         <div *ngIf="getProductType() == 'PC_PART'">
@@ -26,32 +26,43 @@
             <mat-select formControlName="usedState">
               <mat-option [value]="usedState" *ngFor="let usedState of usedStates"> {{ usedState }}</mat-option>
             </mat-select>
-            <mat-hint>Select used state:</mat-hint>
+            <mat-hint>Select used state</mat-hint>
           </mat-form-field>
           <br>
           <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
             <mat-label>Warranty length</mat-label>
             <input type="number" matInput formControlName="warrantyLength">
-            <mat-hint>Enter warranty length:</mat-hint>
+            <mat-hint>Enter warranty length</mat-hint>
           </mat-form-field>
           <br>
           <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
             <mat-label>Manufacturer name</mat-label>
             <input matInput formControlName="manufacturerName">
-            <mat-hint>Enter manufacturer name:</mat-hint>
+            <mat-hint>Enter manufacturer name</mat-hint>
           </mat-form-field>
           <br>
           <mat-form-field *ngIf="getProductType() == 'PC_PART'" appearance="outline">
             <mat-label>Manufacturer catalogue number</mat-label>
             <input matInput formControlName="manufacturerCatalogueNumber">
-            <mat-hint>Enter manufacturer catalogue number:</mat-hint>
+            <mat-hint>Enter manufacturer cat. no</mat-hint>
+          </mat-form-field>
+          <br>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Sort options</mat-label>
+            <mat-select formControlName="sort">
+              <mat-option [value]="SortOptions.NameAscending">Name Ascending</mat-option>
+              <mat-option [value]="SortOptions.NameDescending">Name Descending</mat-option>
+              <mat-option [value]="SortOptions.PriceAscending">Price Ascending</mat-option>
+              <mat-option [value]="SortOptions.PriceDescending">Price Descending</mat-option>
+            </mat-select>
+            <mat-hint>Select sort option</mat-hint>
           </mat-form-field>
           <br>
         </div>
         <div class="submit-button-container">
-        </div>
-        <div class="submit-button-container">
-          <button mat-raised-button type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
         </div>
       </form>
     </div>

@@ -14,18 +14,19 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const snackBar = inject(MatSnackBar);
 
   if (authService.isLoggedIn()) {
-    if (authService.isAdmin()) {
-      return true
-    } else {
-      snackBar.open("You need to be admin in to access this page!", "❌", { duration: 5000, verticalPosition: 'top'});
-      navigation.navigateToHome();
-      return false;
+    if (authService.getCurrentUser() !== undefined) {
+      if (authService.isAdmin()) {
+        return true
+      } else {
+        snackBar.open("You need to be admin in to access this page!", "❌", { duration: 5000, verticalPosition: 'top'});
+        navigation.navigateToHome();
+        return false;
+      }
     }
   }
 
   if (authService.tokenExists()) {
     return authService.getUserByToken().pipe(map((user: User) => {
-      console.log(user);
       if (user && user.role === Role.ROLE_ADMIN) {
         return true;
       }

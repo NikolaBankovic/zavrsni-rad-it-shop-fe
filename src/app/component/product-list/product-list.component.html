@@ -1,21 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="side" [opened]="false">
+  <mat-sidenav #sidenav mode="over" position="start" [opened]="false">
     <app-product-filter (filterApplied)="handleFilter($event)"></app-product-filter>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <button mat-raised-button color="primary" (click)="sidenav.toggle()" class="toggle-button">Toggle Filters</button>
-    <mat-paginator [length]="length"
-                   [pageIndex]="pageIndex"
-                   [pageSize]="pageSize"
-                   [pageSizeOptions]="pageSizeOptions"
-                   (page)="changePage($event)">
-
-    </mat-paginator>
-    <div *ngIf="isLoading" class="loading-container">
+    <div class="header-container">
+      <button mat-raised-button color="primary" (click)="sidenav.toggle()" class="toggle-button">Toggle Filters</button>
+    </div>
+    <div class="loading-container" *ngIf="isLoading">
       <mat-spinner></mat-spinner>
     </div>
-    <div *ngIf="!isLoading" class="content-container">
+    <div class="content-container" *ngIf="!isLoading">
       <div *ngIf="products.length > 0; else noProducts" class="products-grid">
         <div *ngFor="let product of products" class="product-card">
           <div class="product-image-container">
@@ -23,13 +18,13 @@
           </div>
           <div class="product-info-container">
             <div class="product-info">
-              <h2 [routerLink]="['/product', product.id]">{{ product.name }}</h2>
+              <h2 [routerLink]="['/product', product.id]">{{ product.name | truncate:50 }}</h2>
               <p>{{ product.description | truncate:200 }}</p>
-              <p>Price: €{{ product.price }}</p>
-              <p *ngIf="product.pcType">Type: {{ product.pcType }}</p>
-              <p *ngIf="product.pcPartType">Type: {{ product.pcPartType }}</p>
-              <p *ngIf="product.peripheralType">Type: {{ product.peripheralType }}</p>
-              <p *ngIf="product.softwareType">Type: {{ product.softwareType }}</p>
+              <p>Price: €{{ product.price  | number: '1.2-2' }}</p>
+              <p *ngIf="product.pcType">Type: {{ product.pcType.typeName }}</p>
+              <p *ngIf="product.pcPartType">Type: {{ product.pcPartType.typeName }}</p>
+              <p *ngIf="product.peripheralType">Type: {{ product.peripheralType.typeName }}</p>
+              <p *ngIf="product.softwareType">Type: {{ product.softwareType.typeName }}</p>
               <p *ngIf="product.usedState">State: {{ product.usedState }}</p>
             </div>
             <div class="button-container">
@@ -42,5 +37,12 @@
         <p class="no-products-message">No products available.</p>
       </ng-template>
     </div>
+    <mat-paginator class="paginator"
+                   [length]="length"
+                   [pageIndex]="pageIndex"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="changePage($event)">
+    </mat-paginator>
   </mat-sidenav-content>
 </mat-sidenav-container>
